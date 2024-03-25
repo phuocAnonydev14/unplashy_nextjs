@@ -7,6 +7,10 @@ interface SearchParams extends Pagination {
   query: string
 }
 
+interface GetCollectionPhotoQueries extends Pagination {
+  collectionId: string
+}
+
 const searchQueriesFunc = {
   [CategoryEnum.PHOTO]: unsplash.search.getPhotos,
   [CategoryEnum.COLLECTION]: unsplash.search.getCollections,
@@ -19,6 +23,9 @@ export const UnsplashService = {
   },
   getCollections: async (pagination?: Pagination) => {
     return (await unsplash.collections.list(pagination)).response
+  },
+  getCollectionPhotos: async (queries: GetCollectionPhotoQueries) => {
+    return (await unsplash.collections.getPhotos(queries)).response
   },
   getUser: async (username: string) => {
     return (await unsplash.users.get({username})).response

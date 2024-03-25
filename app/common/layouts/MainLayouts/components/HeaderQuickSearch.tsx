@@ -15,7 +15,6 @@ export const HeaderQuickSearch = () => {
     }
   }
 
-
   return <div className={'mr-3'}>
     <Command style={{boxShadow: "unset"}} className="rounded-lg border shadow-md">
       <CommandInput value={searchQuery} onValueChange={val => setSearchQuery(val)} onKeyDown={e => {
