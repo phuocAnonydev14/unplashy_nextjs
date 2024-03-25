@@ -94,7 +94,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       ))}
     </Masonry>
     <div ref={ref} className={'flex gap-3 flex-wrap'}>
-      {!getCollectionPhotoLoading && !getPhotoLoading && collection && Array.from([1, 2, 3]).map(value => {
+      {collection && Array.from([1, 2, 3]).map(value => {
         return <div key={value} className="flex flex-col space-y-3">
           <Skeleton className="min-h-[225px] min-w-[320px] rounded-xl"/>
         </div>
