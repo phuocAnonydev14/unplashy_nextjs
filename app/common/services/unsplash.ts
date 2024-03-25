@@ -15,18 +15,16 @@ const searchQueriesFunc = {
 
 export const UnsplashService = {
   getPhotos: async (pagination?: Pagination) => {
-    const res = await unsplash.photos.list(pagination)
-    console.log(res)
-    return res
+    return (await unsplash.photos.list(pagination)).response
   },
   getCollections: async (pagination?: Pagination) => {
-    return unsplash.collections.list(pagination)
+    return (await unsplash.collections.list(pagination)).response
   },
   getUser: async (username: string) => {
-    return unsplash.users.get({username})
+    return (await unsplash.users.get({username})).response
   },
   search: async (category: CategoryEnum, queries: SearchParams) => {
-    return searchQueriesFunc[category](queries)
+    return (await searchQueriesFunc[category](queries)).response
   }
 }
 

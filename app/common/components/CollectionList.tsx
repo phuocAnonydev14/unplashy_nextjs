@@ -7,7 +7,7 @@ export const CollectionList = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await UnsplashService.getAll()
+      const res = await UnsplashService.getPhotos()
       console.log(res)
     })()
   }, []);
