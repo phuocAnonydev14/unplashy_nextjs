@@ -9,6 +9,7 @@ import {Skeleton} from "@/components/ui/skeleton";
 import {useSearchParams} from "next/navigation";
 import useRequest from "@/app/common/hooks/useApiRequest";
 import {Each} from "@/app/common/components/shared-components/Each";
+import {PhotoDetailModal} from "@/app/common/components/PhotoDetailModal";
 
 const breakPoints = {
   default: 3,
@@ -33,6 +34,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const [, doGetPhotos] = useRequest(UnsplashService.getPhotos)
   const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
   const [firstLoad, setFirstLoad] = useState(false)
+  const [isOpenDetail, setIsOpenDetail] = useState('')
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
@@ -56,12 +58,12 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
         return searchAction(pagination.page)
       }
 
-      if (collection) {
-        return (await doGetCollectionPhoto({
-          collectionId: collection, page: pagination.page + 1,
-          perPage: pagination.perPage
-        }))?.results || []
-      }
+      // if (collection) {
+      //   (await doGetCollectionPhoto({
+      //     collectionId: collection, page: pagination.page + 1,
+      //     perPage: pagination.perPage
+      //   }))?.results || []
+      // }
       return (await doGetPhotos({
         page: pagination.page + 1,
         perPage: pagination.perPage
@@ -108,7 +110,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       columnClassName="my-masonry-grid_column"
     >
       {photos.map(photo => (
-        <div key={photo.id}>
+        <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
           <img loading={"eager"} className='images' src={photo.urls.small} alt={photo.alt_description || ''}/>
         </div>
       ))}
@@ -124,5 +126,6 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       </Each>
       }
     </div>
+    <PhotoDetailModal isOpen={!!isOpenDetail} onClose={() => setIsOpenDetail('')}/>
   </div>
 }

@@ -1,7 +1,6 @@
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {Separator} from "@/components/ui/separator";
 
 interface SearchInputProps {
   query: string,

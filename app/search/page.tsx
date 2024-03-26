@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebounce} from "@/app/common/hooks/useDebounce";
 import {Separator} from "@/components/ui/separator";
-import {Button} from "@/components/ui/button";
 import {CategoryEnum} from "@/app/common/enums/CategoryEnum";
 import {useSearch} from "@/app/search/useSearch";
 import {PhotoGallery} from "@/app/common/components/PhotoGallery";
@@ -50,8 +49,10 @@ export default function SearchPage() {
       {Object.values(CategoryEnum).map((val, index) =>
         <div key={val} className={'flex space-x-4 h-5 items-center'}>
           {index !== 0 && <Separator orientation="vertical"/>}
-          <Button onClick={() => setSelectedCate(val)}
-                  variant={selectedCate === val ? "default" : "outline"}>{val}</Button>
+          {/*<Button onClick={() => setSelectedCate(val)}*/}
+          {/*        variant={selectedCate === val ? "default" : "outline"}>*/}
+            <p className={'mr-1'}>{val}</p>
+          {/*</Button>*/}
         </div>)}
     </div>
     <div className={' py-20 sm:px-16  md:px-20 xl:px-56 px-10'}>
