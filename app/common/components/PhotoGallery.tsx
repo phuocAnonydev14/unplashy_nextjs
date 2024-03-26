@@ -23,7 +23,7 @@ interface PhotoGalleryProps {
 }
 
 export const PhotoGallery = (props: PhotoGalleryProps) => {
-  const {images,collectionId} = props
+  const {images, collectionId} = props
   const [photos, setPhotos] = useState(images)
   const [pagination, setPagination] = useState<{ page: number, perPage: number }>({page: 1, perPage: 10})
   const {ref, inView} = useInView()
@@ -51,13 +51,19 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     if (!firstLoad) return
     try {
       let photoResponse: Basic[] = []
+      // check if have collection in router query
       if (collection) {
-        photoResponse = (await doGetCollectionPhoto({collectionId: collection}))?.results || []
+        photoResponse = (await doGetCollectionPhoto({
+          collectionId: collection, page: pagination.page + 1,
+          perPage: pagination.perPage
+        }))?.results || []
       }
-      photoResponse = (await doGetPhotos({
-        page: pagination.page + 1,
-        perPage: pagination.perPage
-      }))?.results || []
+      // else {
+        photoResponse = (await doGetPhotos({
+          page: pagination.page + 1,
+          perPage: pagination.perPage
+        }))?.results || []
+      // }
       if (!photoResponse) return
       setPhotos(prevState => ([...prevState, ...photoResponse]))
       setPagination(prevState => ({...prevState, page: prevState.page + 1}))
@@ -65,7 +71,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       console.log({e})
     }
 
-  }, [collection, pagination.page, pagination.perPage,firstLoad])
+  }, [collection, pagination.page, pagination.perPage, firstLoad])
 
   useEffect(() => {
     setFirstLoad(true)

@@ -35,6 +35,9 @@ export const UnsplashService = {
   },
   getCollectionDetail: async (collectionId: string) => {
     return (await unsplash.collections.get({collectionId})).response
+  },
+  getRecommend: async (collectionId: string) => {
+    return (await unsplash.collections.getRelated({collectionId})).response
   }
 }
 

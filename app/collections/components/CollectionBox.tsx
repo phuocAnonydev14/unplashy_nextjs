@@ -2,10 +2,11 @@
 
 import {CollectionPhotos} from "@/app/common/types/Collection.type";
 import {Each} from "@/app/common/components/shared-components/Each";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import styles from "./CollectionBox.module.css"
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
+import {UnsplashService} from "@/app/common/services/unsplash";
 
 interface CollectionBoxProps {
   collectionPhotos: CollectionPhotos
@@ -15,6 +16,18 @@ export function CollectionBox(props: CollectionBoxProps) {
   const {collectionPhotos: {photos, title, description, id}} = props
   const containerRef = useRef<any>(null)
   const router = useRouter()
+  const [photoMapper, setPhotoMapper] = useState(photos)
+
+  useEffect(() => {
+    (async () => {
+      console.log("come effect")
+      if (photos.length > 10) {
+        return
+      }
+      const photoResponse = await UnsplashService.getPhotos({ page: 2, perPage: 120})
+      setPhotoMapper(prevState => ([...prevState, ...photoResponse?.results || []]))
+    })()
+  }, [photos]);
 
   const handleScroll = (scrollOffset: number) => {
     containerRef.current.scrollLeft += scrollOffset;
@@ -41,7 +54,7 @@ export function CollectionBox(props: CollectionBoxProps) {
           return <img src={small} alt={alt_description || ''}
                       style={{borderRadius: "8px", objectFit: "cover", height: "200px", width: "400px"}}/>
         }}
-        of={photos}
+        of={photoMapper}
       />
     </div>
     <Button className={styles.arrowRight} onClick={() => handleScroll(100)} variant={"ghost"}>
