@@ -5,11 +5,12 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {Each} from "@/app/common/components/shared-components/Each";
 
 interface CollectionsProps {
-  collections: Collection[]
+  collections: Collection[],
+  isSearch?: boolean
 }
 
 export const CollectionList = (props: CollectionsProps) => {
-  const {collections} = props
+  const {collections, isSearch} = props
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -24,12 +25,13 @@ export const CollectionList = (props: CollectionsProps) => {
   }
 
   return <div className={'flex gap-3 mb-10 overflow-auto max-w-[100%] pb-1'}>
-    <Button
-      onClick={() => handleChooseCollection()}
-      variant={!searchParams.get('collection') ? "default" : "secondary"}
-      className={""}
-      key={'discover'}>Discover
+    {!isSearch && <Button
+        onClick={() => handleChooseCollection()}
+        variant={!searchParams.get('collection') ? "default" : "secondary"}
+        className={""}
+        key={'discover'}>Discover
     </Button>
+    }
     <Each<Collection>
       render={({title, id}) => {
         return <Button

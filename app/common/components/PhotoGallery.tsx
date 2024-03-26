@@ -19,19 +19,21 @@ const breakPoints = {
 
 interface PhotoGalleryProps {
   images: Basic[],
-  collectionId?: string
+  collectionId?: string,
+  searchAction?: (page: number) => Promise<Basic[]>
 }
 
 export const PhotoGallery = (props: PhotoGalleryProps) => {
-  const {images, collectionId} = props
+  const {images, collectionId, searchAction} = props
   const [photos, setPhotos] = useState(images)
   const [pagination, setPagination] = useState<{ page: number, perPage: number }>({page: 1, perPage: 10})
   const {ref, inView} = useInView()
   const searchParams = useSearchParams()
   const collection = searchParams.get('collection') || collectionId
-  const [{loading: getPhotoLoading}, doGetPhotos] = useRequest(UnsplashService.getPhotos)
-  const [{loading: getCollectionPhotoLoading}, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
+  const [, doGetPhotos] = useRequest(UnsplashService.getPhotos)
+  const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
   const [firstLoad, setFirstLoad] = useState(false)
+
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
     try {
@@ -47,23 +49,33 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     }
   }
 
-  const handleLoadMorePhotos = useCallback(async () => {
-    if (!firstLoad) return
+  const handleFetchPhotos = async () => {
     try {
-      let photoResponse: Basic[] = []
       // check if have collection in router query
+      if (searchAction) {
+        return searchAction(pagination.page)
+      }
+
       if (collection) {
-        photoResponse = (await doGetCollectionPhoto({
+        return (await doGetCollectionPhoto({
           collectionId: collection, page: pagination.page + 1,
           perPage: pagination.perPage
         }))?.results || []
       }
-      // else {
-        photoResponse = (await doGetPhotos({
-          page: pagination.page + 1,
-          perPage: pagination.perPage
-        }))?.results || []
-      // }
+      return (await doGetPhotos({
+        page: pagination.page + 1,
+        perPage: pagination.perPage
+      }))?.results || []
+
+    } catch (e) {
+
+    }
+  }
+
+  const handleLoadMorePhotos = useCallback(async () => {
+    if (!firstLoad) return
+    try {
+      let photoResponse: Basic[] = await handleFetchPhotos()
       if (!photoResponse) return
       setPhotos(prevState => ([...prevState, ...photoResponse]))
       setPagination(prevState => ({...prevState, page: prevState.page + 1}))
@@ -72,6 +84,11 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     }
 
   }, [collection, pagination.page, pagination.perPage, firstLoad])
+
+  useEffect(() => {
+    setPhotos(images)
+    setPagination({page: 1, perPage: 10})
+  }, [images]);
 
   useEffect(() => {
     setFirstLoad(true)
@@ -100,7 +117,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       {collection && <Each<number>
           render={(item, index) =>
             <div key={item} className="flex flex-col space-y-3">
-              <Skeleton className="min-h-[225px] min-w-[320px] rounded-xl"/>
+              <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"/>
             </div>}
           of={Array.from([1, 2, 3])}
       >

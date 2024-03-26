@@ -2,11 +2,12 @@
 
 import {Command, CommandInput, CommandList} from "@/components/ui/command";
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 export const HeaderQuickSearch = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
-
+  const router = useRouter()
   const handleSubmit = async () => {
     try {
       setSearchQuery('')
@@ -20,6 +21,7 @@ export const HeaderQuickSearch = () => {
       <CommandInput value={searchQuery} onValueChange={val => setSearchQuery(val)} onKeyDown={e => {
         if (e.key === "Enter") {
           handleSubmit().then()
+          router.push(`/search?q=${searchQuery}`)
         }
       }} placeholder="Search photos..."/>
       <CommandList>

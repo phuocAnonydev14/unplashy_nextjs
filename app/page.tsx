@@ -25,7 +25,7 @@ export default async function Home(props: HomeProps) {
   const [photos, collections] = await Promise.all([photosData, collectionsData])
   if (!photos || !collections) return
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-24 py-10">
+    <main className="flex min-h-screen flex-col items-center justify-between px-24 sm:px-10 py-10">
       <CollectionList collections={collections.results}/>
       <PhotoGallery images={photos?.results}/>
     </main>
