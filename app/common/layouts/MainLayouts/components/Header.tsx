@@ -5,7 +5,7 @@ import styles from "./header.module.css"
 
 export const Header = () => {
   return <>
-    <div className={"mb-1 px-6 flex justify-between items-center sticky top-0 bg-[#fff]"}
+    <div className={"mb-1 px-6 flex justify-between items-center sticky top-0 bg-[#fff] z-40"}
          style={{boxShadow: "rgba(0, 0, 0, 0.04) 0px 3px 5px"}}>
       <Image src={'/images/logo.png'} alt={"Logo"} width={80} height={80}/>
       <div className={`flex gap-5 items-center font-[500] ${styles['menu']}`}>

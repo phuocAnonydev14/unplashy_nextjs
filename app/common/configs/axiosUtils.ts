@@ -3,7 +3,6 @@ export function defineCancelApiObject(apiObject: Record<string, Function>) {
 
 
   Object.getOwnPropertyNames(apiObject).forEach((apiPropertyName) => {
-    console.log({apiPropertyName})
     const cancellationControllerObject: { controller: AbortController | undefined } = {
       controller: undefined,
     }

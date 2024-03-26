@@ -7,7 +7,7 @@ interface SearchParams extends Pagination {
   query: string
 }
 
-interface GetCollectionPhotoQueries extends Pagination {
+export interface GetCollectionPhotoQueries extends Pagination {
   collectionId: string
 }
 
@@ -32,6 +32,9 @@ export const UnsplashService = {
   },
   search: async (category: CategoryEnum, queries: SearchParams) => {
     return (await searchQueriesFunc[category](queries)).response
+  },
+  getCollectionDetail: async (collectionId: string) => {
+    return (await unsplash.collections.get({collectionId})).response
   }
 }
 
