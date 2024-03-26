@@ -111,7 +111,8 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     >
       {photos.map(photo => (
         <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
-          <img loading={"eager"} className='images' src={photo.urls.small} alt={photo.alt_description || ''}/>
+          <img style={{cursor: "zoom-in"}} loading={"eager"} className='images' src={photo.urls.small}
+               alt={photo.alt_description || ''}/>
         </div>
       ))}
     </Masonry>
@@ -126,6 +127,6 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       </Each>
       }
     </div>
-    <PhotoDetailModal isOpen={!!isOpenDetail} onClose={() => setIsOpenDetail('')}/>
+    {isOpenDetail && <PhotoDetailModal photoId={isOpenDetail} onClose={() => setIsOpenDetail('')}/>}
   </div>
 }

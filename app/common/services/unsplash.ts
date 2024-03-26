@@ -38,6 +38,9 @@ export const UnsplashService = {
   },
   getRecommend: async (collectionId: string) => {
     return (await unsplash.collections.getRelated({collectionId})).response
+  },
+  getPhotoDetail: async (photoId: string) => {
+    return (await unsplash.photos.get({photoId})).response
   }
 }
 
