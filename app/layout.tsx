@@ -5,6 +5,7 @@ import {Footer, Header} from "@/common/layouts/MainLayouts/components";
 import {PropsWithChildren} from "react";
 import {cn} from "@/lib/utils"
 import NextTopLoader from 'nextjs-toploader';
+import {Toaster} from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout(props: PropsWithChildren) {
       fontSans.variable
     )}>
     <NextTopLoader/>
+    <Toaster />
     <Header/>
     {children}
     <Footer/>

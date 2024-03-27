@@ -12,6 +12,7 @@ import {Each} from "@/common/components/shared-components/Each";
 import {PhotoDetailModal} from "@/common/components/PhotoDetailModal";
 import {EmptyData} from "@/common/components/shared-components/EmptyData";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
+import {useToast} from "@/components/ui/use-toast";
 
 const breakPoints = {
   default: 3,
@@ -30,15 +31,17 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const {images, collectionId, searchAction} = props
   const [photos, setPhotos] = useState(images)
   const [pagination, setPagination] = useState<{ page: number, perPage: number }>({page: 1, perPage: 10})
-  const {ref, inView} = useInView()
-  const searchParams = useSearchParams()
-  const collection = searchParams.get('collection') || collectionId
-  const [, doGetPhotos] = useRequest(UnsplashService.getPhotos)
-  const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
   const [firstLoad, setFirstLoad] = useState(false)
   const [isOpenDetail, setIsOpenDetail] = useState('')
   const [isEndPagination, setIsEndPagination] = useState(false)
+
+  const [, doGetPhotos] = useRequest(UnsplashService.getPhotos)
+  const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
+  const searchParams = useSearchParams()
   const isMobile = useMediaQuery("(max-width: 768px)")
+  const collection = searchParams.get('collection') || collectionId
+  const {ref, inView} = useInView()
+  const { toast } = useToast()
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
@@ -74,6 +77,12 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
 
     } catch (e) {
       console.log({e})
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        // action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
     }
   }
 
@@ -89,6 +98,12 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       setPagination(prevState => ({...prevState, page: prevState.page + 1}))
     } catch (e) {
       console.log({e})
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        // action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
     }
 
   }, [collection, pagination.page, pagination.perPage, firstLoad])
