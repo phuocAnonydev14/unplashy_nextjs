@@ -1,6 +1,6 @@
 'use client'
 
-import {Suspense, useEffect} from "react";
+import {useEffect} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebounce} from "@/common/hooks/useDebounce";
 import {Separator} from "@/components/ui/separator";
@@ -41,24 +41,20 @@ export default function SearchPage() {
     handleSearch().then()
   }, [debouncedSearchVal]);
 
-  return <Suspense>
-  <div className={'text-center my-10'}>
+  return <div className={'text-center my-10'}>
     <SearchInput loading={loading} onChangeQuery={onChangeQuery} query={searchVal}/>
     <h2 style={{fontSize: "1.8rem"}} className={'my-4 font-semibold'}>{debouncedSearchVal || 'Popular'}</h2>
     <div className="flex h-5 items-center space-x-4 text-sm justify-center mt-6">
       {Object.values(CategoryEnum).map((val, index) =>
         <div key={val} className={'flex space-x-4 h-5 items-center'}>
           {index !== 0 && <Separator orientation="vertical"/>}
-          {/*<Button onClick={() => setSelectedCate(val)}*/}
-          {/*        variant={selectedCate === val ? "default" : "outline"}>*/}
             <p className={'mr-1'}>{val}</p>
-          {/*</Button>*/}
         </div>)}
     </div>
     <div className={' py-20 sm:px-16  md:px-20 xl:px-56 px-5'}>
       {searchResults &&
           <>
-              <div className={'flex justify-center'}>
+              <div className={'flex justify-center mb-5'}>
                   <CollectionList isSearch={true} collections={searchCollectionResults}/>
               </div>
               <PhotoGallery
@@ -73,5 +69,4 @@ export default function SearchPage() {
           </>}
     </div>
   </div>
-    </Suspense>
 }

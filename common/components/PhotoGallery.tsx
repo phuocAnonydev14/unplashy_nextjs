@@ -36,6 +36,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
   const [firstLoad, setFirstLoad] = useState(false)
   const [isOpenDetail, setIsOpenDetail] = useState('')
+  const [isEndPagination, setIsEndPagination] = useState(false)
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
@@ -71,7 +72,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       }))?.results || []
 
     } catch (e) {
-
+      console.log({e})
     }
   }
 
@@ -79,7 +80,10 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     if (!firstLoad) return
     try {
       let photoResponse: Basic[] = await handleFetchPhotos()
-      if (!photoResponse) return
+      if (!photoResponse || photoResponse.length === 0) {
+        setIsEndPagination(true)
+        return
+      }
       setPhotos(prevState => ([...prevState, ...photoResponse]))
       setPagination(prevState => ({...prevState, page: prevState.page + 1}))
     } catch (e) {
@@ -124,18 +128,18 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
             </div>
           ))}
         </Masonry>
-        <div ref={ref} className={'flex gap-3 flex-wrap'}>
-          {<Each<number>
-            render={(item, index) =>
-              <div key={item} className="flex flex-col space-y-4">
-                <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
-                          style={{minHeight: "325px", minWidth: "420px"}}/>
-              </div>}
-            of={Array.from({length: 3})}
-          >
-          </Each>
-          }
-        </div>
+        {!isEndPagination && <div ref={ref} className={'flex gap-3 flex-wrap'}>
+            <Each<number>
+                render={(item, index) =>
+                  <div key={item} className="flex flex-col space-y-4">
+                    <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
+                              style={{minHeight: "325px", minWidth: "420px"}}/>
+                  </div>}
+                of={Array.from({length: 3})}
+            >
+            </Each>
+
+        </div>}
       </>
       :
       <EmptyData/>
