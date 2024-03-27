@@ -16,11 +16,13 @@ import {useEffect, useState} from "react";
 import {handleFetchCollectionsPhotos} from "@/app/collections/fetchCollections";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
 import {EmptyData} from "@/common/components/shared-components/EmptyData";
+import {useToast} from "@/components/ui/use-toast";
 
 export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: CollectionPhotos[] }) => {
   const [page, setPage] = useState(1)
   const [collectionPhotoMapper, setCollectionPhotoMapper] = useState<CollectionPhotos[]>([])
   const isMobile = useMediaQuery("(max-width: 928px)")
+  const { toast } = useToast()
 
   useEffect(() => {
     setCollectionPhotoMapper(collectionsPhotos)
@@ -29,8 +31,17 @@ export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: Coll
   useEffect(() => {
     if (page === 1) return
     (async () => {
-      const res = await handleFetchCollectionsPhotos(page)
-      setCollectionPhotoMapper(res)
+      try{
+        const res = await handleFetchCollectionsPhotos(page)
+        setCollectionPhotoMapper(res)
+      }catch (e) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          // action: <ToastAction altText="Try again">Try again</ToastAction>,
+        })
+      }
     })()
   }, [page]);
 
