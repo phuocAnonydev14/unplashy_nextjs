@@ -43,15 +43,15 @@ export default function SearchPage() {
 
   return <div className={'text-center my-10'}>
     <SearchInput loading={loading} onChangeQuery={onChangeQuery} query={searchVal}/>
-    <h2 style={{fontSize: "1.8rem"}} className={'my-4 font-semibold'}>{debouncedSearchVal || 'Popular'}</h2>
-    <div className="flex h-5 items-center space-x-4 text-sm justify-center mt-6">
+    <h2 style={{fontSize: "1.8rem"}} className={'my-3 font-semibold'}>{debouncedSearchVal || 'Popular'}</h2>
+    <div className="flex h-5 items-center space-x-4 text-sm justify-center mt-2">
       {Object.values(CategoryEnum).map((val, index) =>
         <div key={val} className={'flex space-x-4 h-5 items-center'}>
           {index !== 0 && <Separator orientation="vertical"/>}
             <p className={'mr-1'}>{val}</p>
         </div>)}
     </div>
-    <div className={' py-20 sm:px-16  md:px-20 xl:px-56 px-5'}>
+    <div className={' py-10 sm:px-16  md:px-20 xl:px-56 px-5'}>
       {searchResults &&
           <>
               <div className={'flex justify-center mb-5'}>

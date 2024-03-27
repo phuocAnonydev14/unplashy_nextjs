@@ -127,23 +127,24 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       ))}
     </Masonry>
 
-    {photos?.length > 0
-      ?
-      <div>
-        {<div ref={ref} className={'flex gap-3 flex-wrap'} style={{flexWrap:"wrap"}}>
-          <Each<number>
-            render={(item, index) =>
-              <div key={item} className="flex flex-col space-y-4">
-                <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
-                          style={{minHeight: "325px", width: isMobile ? "300px" : "420px"}}/>
-              </div>}
-            of={Array.from({length: 3})}
-          >
-          </Each>
-        </div>}
-      </div>
-      :
-      <EmptyData/>
+    {
+      images?.length > 0
+        ?
+        <div>
+          {!isEndPagination && <div ref={ref} className={'flex gap-3 flex-wrap'} style={{flexWrap: "wrap"}}>
+              <Each<number>
+                  render={(item, index) =>
+                    <div key={item} className="flex flex-col space-y-4">
+                      <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
+                                style={{minHeight: "325px", width: isMobile ? "300px" : "420px"}}/>
+                    </div>}
+                  of={Array.from({length: 3})}
+              >
+              </Each>
+          </div>}
+        </div>
+        :
+        <EmptyData/>
     }
 
     <div ref={ref} className={'flex gap-3 flex-wrap'}>
