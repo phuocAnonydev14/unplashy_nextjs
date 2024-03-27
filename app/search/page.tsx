@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from "react";
+import {Suspense, useEffect} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebounce} from "@/common/hooks/useDebounce";
 import {Separator} from "@/components/ui/separator";
@@ -41,7 +41,8 @@ export default function SearchPage() {
     handleSearch().then()
   }, [debouncedSearchVal]);
 
-  return <div className={'text-center my-10'}>
+  return <Suspense>
+  <div className={'text-center my-10'}>
     <SearchInput loading={loading} onChangeQuery={onChangeQuery} query={searchVal}/>
     <h2 style={{fontSize: "1.8rem"}} className={'my-4 font-semibold'}>{debouncedSearchVal || 'Popular'}</h2>
     <div className="flex h-5 items-center space-x-4 text-sm justify-center mt-6">
@@ -72,4 +73,5 @@ export default function SearchPage() {
           </>}
     </div>
   </div>
+    </Suspense>
 }
