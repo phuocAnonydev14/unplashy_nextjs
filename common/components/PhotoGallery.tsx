@@ -109,7 +109,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   }, [inView]);
 
   return <div>
-    {photos.length > 0
+    {photos?.length > 0
       ?
       <>
         <Masonry
@@ -117,7 +117,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {photos.map(photo => (
+          {photos?.map(photo => (
             <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
               <img
                 style={{cursor: "zoom-in"}} loading={"lazy"}
