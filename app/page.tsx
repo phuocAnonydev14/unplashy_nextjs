@@ -7,15 +7,27 @@ interface HomeProps {
 }
 
 async function getPhotos(collectionId?: string) {
-  if (collectionId) {
-    console.log({collectionId})
-    return UnsplashService.getCollectionPhotos({collectionId: collectionId})
+  try {
+    if (collectionId) {
+      console.log({collectionId})
+      return UnsplashService.getCollectionPhotos({collectionId: collectionId})
+    }
+    return UnsplashService.getPhotos();
+  } catch (e) {
+    console.log({e})
   }
-  return UnsplashService.getPhotos();
+
+  return {results: []}
 }
 
 async function getCollections() {
-  return UnsplashService.getCollections()
+  try {
+    return UnsplashService.getCollections()
+  } catch (e) {
+    console.log({e})
+  }
+
+  return {results: []}
 }
 
 export default async function Home(props: HomeProps) {

@@ -13,12 +13,12 @@ interface CollectionBoxProps {
 }
 
 export function CollectionBox(props: CollectionBoxProps) {
-  const {collectionPhotos: {photos, title, description, id}} = props
+  const {collectionPhotos: {photos, title, id}} = props
   const containerRef = useRef<any>(null)
   const router = useRouter()
   const [photoMapper, setPhotoMapper] = useState(photos)
   const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -81,13 +81,11 @@ export function CollectionBox(props: CollectionBoxProps) {
         of={photoMapper}
       />
     </div>
-    {showRightArrow &&
         <Button className={styles.arrowRight} onClick={() => handleScroll(200)} variant={"outline"} size={"icon"}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                 <path
                     d="M11.293 4.707 17.586 11H4v2h13.586l-6.293 6.293 1.414 1.414L21.414 12l-8.707-8.707-1.414 1.414z"/>
             </svg>
         </Button>
-    }
   </div>
 }
