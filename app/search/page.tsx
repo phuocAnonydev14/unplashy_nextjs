@@ -5,8 +5,8 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebounce} from "@/common/hooks/useDebounce";
 import {Separator} from "@/components/ui/separator";
 import {CategoryEnum} from "@/common/enums/CategoryEnum";
-import {PhotoGallery} from "@/common/components/PhotoGallery";
-import {CollectionList} from "@/common/components/CollectionList";
+import {PhotoGallery} from "@/components/PhotoGallery";
+import {CollectionList} from "@/components/CollectionList";
 import {UnsplashService} from "@/common/services/unsplash";
 import {Basic} from "unsplash-js/src/methods/photos/types";
 import {SearchInput} from "@/app/search/components/SearchInput";
@@ -54,7 +54,7 @@ export default function SearchPage() {
     <div className={' py-10 sm:px-16  md:px-20 xl:px-56 px-5'}>
       {searchResults &&
           <>
-              <div className={'flex justify-center mb-5'}>
+              <div className={'flex justify-center mb-1'}>
                   <CollectionList isSearch={true} collections={searchCollectionResults}/>
               </div>
               <PhotoGallery

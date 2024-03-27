@@ -2,7 +2,7 @@
 import {Collection} from "@/common/types/Collection.type";
 import {Button} from "@/components/ui/button";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {Each} from "@/common/components/shared-components/Each";
+import {Each} from "@/components/shared-components/Each";
 
 interface CollectionsProps {
   collections: Collection[],

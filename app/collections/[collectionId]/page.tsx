@@ -4,7 +4,7 @@ import useRequest from "@/common/hooks/useApiRequest";
 import {GetCollectionPhotoQueries, UnsplashService} from "@/common/services/unsplash";
 import {useEffect} from "react";
 import {Basic} from "unsplash-js/src/methods/photos/types";
-import {PhotoGallery} from "@/common/components/PhotoGallery";
+import {PhotoGallery} from "@/components/PhotoGallery";
 import {Collection} from "@/common/types/Collection.type";
 
 export default function CollectionDetail() {

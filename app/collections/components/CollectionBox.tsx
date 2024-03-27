@@ -1,7 +1,7 @@
 'use client'
 
 import {CollectionPhotos} from "@/common/types/Collection.type";
-import {Each} from "@/common/components/shared-components/Each";
+import {Each} from "@/components/shared-components/Each";
 import {useEffect, useRef, useState} from "react";
 import styles from "./CollectionBox.module.css"
 import {Button} from "@/components/ui/button";

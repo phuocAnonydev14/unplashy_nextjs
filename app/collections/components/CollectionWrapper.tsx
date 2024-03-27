@@ -2,7 +2,7 @@
 
 import {CollectionPhotos} from "@/common/types/Collection.type";
 import {CollectionBox} from "@/app/collections/components/CollectionBox";
-import {Each} from "@/common/components/shared-components/Each";
+import {Each} from "@/components/shared-components/Each";
 import {
   Pagination,
   PaginationContent,
@@ -15,7 +15,7 @@ import {
 import {useEffect, useState} from "react";
 import {handleFetchCollectionsPhotos} from "@/app/collections/fetchCollections";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
-import {EmptyData} from "@/common/components/shared-components/EmptyData";
+import {EmptyData} from "@/components/shared-components/EmptyData";
 import {useToast} from "@/components/ui/use-toast";
 
 export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: CollectionPhotos[] }) => {

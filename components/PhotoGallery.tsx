@@ -8,9 +8,9 @@ import {useInView} from "react-intersection-observer";
 import {Skeleton} from "@/components/ui/skeleton";
 import {useSearchParams} from "next/navigation";
 import useRequest from "@/common/hooks/useApiRequest";
-import {Each} from "@/common/components/shared-components/Each";
-import {PhotoDetailModal} from "@/common/components/PhotoDetailModal";
-import {EmptyData} from "@/common/components/shared-components/EmptyData";
+import {Each} from "@/components/shared-components/Each";
+import {PhotoDetailModal} from "@/components/PhotoDetailModal";
+import {EmptyData} from "@/components/shared-components/EmptyData";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
 import {useToast} from "@/components/ui/use-toast";
 
