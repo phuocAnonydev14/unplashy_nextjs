@@ -17,4 +17,6 @@ export const handleFetchCollectionsPhotos = async (page: number = 1) => {
   } catch (e) {
     console.log(e)
   }
+
+  return []
 }
