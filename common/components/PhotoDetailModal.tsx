@@ -22,8 +22,8 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
   const {photoId, onClose} = props
   const [photo, setPhoto] = useState<Basic>()
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const { toast } = useToast()
-  const [{loading},doFetchPhoto] = useRequest(UnsplashService.getPhotoDetail)
+  const {toast} = useToast()
+  const [{loading}, doFetchPhoto] = useRequest(UnsplashService.getPhotoDetail)
 
   useEffect(() => {
     (async () => {
@@ -51,12 +51,15 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
       <LazyLoadImage
         src={photo?.urls?.full || '/images/default-img.png'}
         alt={photo?.alt_description || ''}
-        style={{height: "70dvh", borderRadius: "8px", objectFit: "cover",width:isMobile ? "100%" : "70%"}}
+        style={{height: "70dvh", borderRadius: "8px", objectFit: "cover", width: isMobile ? "100%" : "70%"}}
       />
-      <div className={'items-start mt-6 flex flex-col gap-3'} style={{width:isMobile ? "100%" : "70%"}}>
-        <h1 style={{fontSize: "20px", fontWeight: 500}}>
-          <FontAwesomeIcon icon={faUser} className={'mr-2'}/>
-          {photo?.user?.name}</h1>
+      <div className={'items-start mt-6 flex flex-col gap-3'} style={{width: isMobile ? "100%" : "70%"}}>
+        {photo?.user?.name &&
+            <h1 style={{fontSize: "20px", fontWeight: 500}}>
+                <FontAwesomeIcon icon={faUser} className={'mr-2'}/>
+              {photo?.user?.name}
+            </h1>
+        }
         {photo?.user?.bio &&
             <p>
                 <FontAwesomeIcon icon={faPenNib} className={'mr-2'}/>

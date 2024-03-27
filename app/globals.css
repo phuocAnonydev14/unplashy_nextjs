@@ -71,14 +71,14 @@
 ::-webkit-scrollbar
 {
   height: 5px;
-  width: 10px;
-  background-color: #F5F5F5;
+  width: 8px;
+  background-color: rgba(245, 245, 245, 0.85);
 }
 
 ::-webkit-scrollbar-thumb
 {
-  background-color: #000000;
-  border: 2px solid #555555;
+  background-color: #B4B4B8;
+  border: unset;
 }
 
 .loader {
