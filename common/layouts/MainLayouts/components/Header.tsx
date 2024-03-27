@@ -16,11 +16,11 @@ const menuItems = [
   },
   {
     title: "Categories",
-    href: "null"
+    href: null
   },
   {
     title: "Artists",
-    href: "null"
+    href: null
   }
 ]
 
@@ -36,10 +36,13 @@ export const HeaderConTent = ({isResponsive, onCloseModal, activeMenu}: HeaderPr
     className={`flex  ${isResponsive ? "flex-col-reverse items-start" : "flex"} ${isResponsive ? "justify-start" : "justify-between"} md:hidden gap-10  font-[500] sm:hidden`}>
     <div
       className={`flex ${isResponsive && "flex-col"} ${isResponsive ? "items-start" : "items-center"} gap-4  font-[500] ${styles['menu']} `}>
-      {menuItems.map(({title, href}) => {
+      {menuItems.map(({title, href},index) => {
         return <span key={title}>
-          <Link onClick={() => onCloseModal && onCloseModal()} href={href === "null" ? '/' : href}
-                className={`${activeMenu?.endsWith(href) && styles.active}`}>
+          <Link
+            onClick={() => onCloseModal && onCloseModal()}
+            href={!href ? '/' : href}
+                className={`${activeMenu?.endsWith(index <= 1  ? href as string : '') && styles.active}`}
+          >
           {title}
         </Link>
         </span>
