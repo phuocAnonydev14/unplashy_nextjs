@@ -9,7 +9,6 @@ interface HomeProps {
 async function getPhotos(collectionId?: string) {
   try {
     if (collectionId) {
-      console.log({collectionId})
       return UnsplashService.getCollectionPhotos({collectionId: collectionId})
     }
     return UnsplashService.getPhotos();

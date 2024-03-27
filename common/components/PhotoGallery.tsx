@@ -11,6 +11,7 @@ import useRequest from "@/common/hooks/useApiRequest";
 import {Each} from "@/common/components/shared-components/Each";
 import {PhotoDetailModal} from "@/common/components/PhotoDetailModal";
 import {EmptyData} from "@/common/components/shared-components/EmptyData";
+import useMediaQuery from "@/common/hooks/useMediaQuery";
 
 const breakPoints = {
   default: 3,
@@ -37,6 +38,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const [firstLoad, setFirstLoad] = useState(false)
   const [isOpenDetail, setIsOpenDetail] = useState('')
   const [isEndPagination, setIsEndPagination] = useState(false)
+  const isMobile = useMediaQuery("(max-width: 768px)")
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
@@ -55,11 +57,10 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
 
   const handleFetchPhotos = async () => {
     try {
-      // check if have collection in router query
+      // check if you have collection in router query
       if (searchAction) {
         return searchAction(pagination.page)
       }
-
       // if (collection) {
       //   (await doGetCollectionPhoto({
       //     collectionId: collection, page: pagination.page + 1,
@@ -109,41 +110,54 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   }, [inView]);
 
   return <div>
+    <Masonry
+      breakpointCols={breakPoints}
+      className="my-masonry-grid"
+      columnClassName="my-masonry-grid_column"
+    >
+      {photos?.map(photo => (
+        <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
+          <img
+            style={{cursor: "zoom-in"}} loading={"lazy"}
+            className='images'
+            src={photo.urls.small}
+            alt={photo.alt_description || ''}
+          />
+        </div>
+      ))}
+    </Masonry>
+
     {photos?.length > 0
       ?
-      <>
-        <Masonry
-          breakpointCols={breakPoints}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {photos?.map(photo => (
-            <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
-              <img
-                style={{cursor: "zoom-in"}} loading={"lazy"}
-                className='images'
-                src={photo.urls.small}
-                alt={photo.alt_description || ''}
-              />
-            </div>
-          ))}
-        </Masonry>
-        {!isEndPagination && <div ref={ref} className={'flex gap-3 flex-wrap'}>
-            <Each<number>
-                render={(item, index) =>
-                  <div key={item} className="flex flex-col space-y-4">
-                    <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
-                              style={{minHeight: "325px", minWidth: "420px"}}/>
-                  </div>}
-                of={Array.from({length: 3})}
-            >
-            </Each>
-
+      <div>
+        {<div ref={ref} className={'flex gap-3 flex-wrap'} style={{flexWrap:"wrap"}}>
+          <Each<number>
+            render={(item, index) =>
+              <div key={item} className="flex flex-col space-y-4">
+                <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
+                          style={{minHeight: "325px", width: isMobile ? "300px" : "420px"}}/>
+              </div>}
+            of={Array.from({length: 3})}
+          >
+          </Each>
         </div>}
-      </>
+      </div>
       :
       <EmptyData/>
     }
+
+    <div ref={ref} className={'flex gap-3 flex-wrap'}>
+      {<Each<number>
+        render={(item, index) =>
+          <div key={item} className="flex flex-col space-y-3">
+            <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"/>
+          </div>}
+        of={Array.from({length: 3})}
+      >
+      </Each>
+      }
+    </div>
+
 
     {
       isOpenDetail && <PhotoDetailModal photoId={isOpenDetail} onClose={() => setIsOpenDetail('')}/>
