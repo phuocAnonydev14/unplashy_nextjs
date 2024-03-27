@@ -65,8 +65,8 @@ export const HeaderConTent = ({isResponsive, onCloseModal, activeMenu}: HeaderPr
 
 export const Header = () => {
   return <>
-    <div className={"mb-1 px-24 flex justify-between items-center sticky top-0 bg-[#fff] z-40"}
-         style={{boxShadow: "rgba(0, 0, 0, 0.04) 0px 3px 5px", paddingInline: "1rem"}}>
+    <div className={"mb-1 px-2 flex justify-between items-center sticky top-0 bg-[#fff] z-40"}
+         style={{boxShadow: "rgba(0, 0, 0, 0.04) 0px 3px 5px", paddingInline: "2rem"}}>
       <Link href={'/'}>
         <Image src={'/images/logo.png'} alt={"Logo"} width={80} height={80}/>
       </Link>
