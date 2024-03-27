@@ -3,13 +3,14 @@
 import Masonry from "react-masonry-css";
 import {Basic} from "unsplash-js/src/methods/photos/types";
 import {useCallback, useEffect, useState} from "react";
-import {UnsplashService} from "@/app/common/services/unsplash";
+import {UnsplashService} from "@/common/services/unsplash";
 import {useInView} from "react-intersection-observer";
 import {Skeleton} from "@/components/ui/skeleton";
 import {useSearchParams} from "next/navigation";
-import useRequest from "@/app/common/hooks/useApiRequest";
-import {Each} from "@/app/common/components/shared-components/Each";
-import {PhotoDetailModal} from "@/app/common/components/PhotoDetailModal";
+import useRequest from "@/common/hooks/useApiRequest";
+import {Each} from "@/common/components/shared-components/Each";
+import {PhotoDetailModal} from "@/common/components/PhotoDetailModal";
+import {EmptyData} from "@/common/components/shared-components/EmptyData";
 
 const breakPoints = {
   default: 3,
@@ -40,7 +41,7 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
     if (!firstLoad) return
     try {
       setPagination({page: 1, perPage: 10})
-      let photoResponse: Basic[] = []
+      let photoResponse: Basic[]
       if (!collection) {
         photoResponse = (await doGetPhotos({page: 1, perPage: pagination.perPage}))?.results || []
       } else
@@ -104,29 +105,44 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   }, [inView]);
 
   return <div>
-    <Masonry
-      breakpointCols={breakPoints}
-      className="my-masonry-grid"
-      columnClassName="my-masonry-grid_column"
-    >
-      {photos.map(photo => (
-        <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
-          <img style={{cursor: "zoom-in"}} loading={"eager"} className='images' src={photo.urls.small}
-               alt={photo.alt_description || ''}/>
+    {photos.length > 0
+      ?
+      <>
+        <Masonry
+          breakpointCols={breakPoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {photos.map(photo => (
+            <div onClick={() => setIsOpenDetail(photo.id)} key={photo.id}>
+              <img
+                style={{cursor: "zoom-in"}} loading={"lazy"}
+                className='images'
+                src={photo.urls.small}
+                alt={photo.alt_description || ''}
+              />
+            </div>
+          ))}
+        </Masonry>
+        <div ref={ref} className={'flex gap-3 flex-wrap'}>
+          {<Each<number>
+            render={(item, index) =>
+              <div key={item} className="flex flex-col space-y-4">
+                <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
+                          style={{minHeight: "325px", minWidth: "420px"}}/>
+              </div>}
+            of={Array.from({length: 3})}
+          >
+          </Each>
+          }
         </div>
-      ))}
-    </Masonry>
-    <div ref={ref} className={'flex gap-3 flex-wrap'}>
-      {collection && <Each<number>
-          render={(item, index) =>
-            <div key={item} className="flex flex-col space-y-3">
-              <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"/>
-            </div>}
-          of={Array.from([1, 2, 3])}
-      >
-      </Each>
-      }
-    </div>
-    {isOpenDetail && <PhotoDetailModal photoId={isOpenDetail} onClose={() => setIsOpenDetail('')}/>}
+      </>
+      :
+      <EmptyData/>
+    }
+
+    {
+      isOpenDetail && <PhotoDetailModal photoId={isOpenDetail} onClose={() => setIsOpenDetail('')}/>
+    }
   </div>
 }

@@ -1,8 +1,8 @@
 'use client'
-import {Collection} from "@/app/common/types/Collection.type";
+import {Collection} from "@/common/types/Collection.type";
 import {Button} from "@/components/ui/button";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {Each} from "@/app/common/components/shared-components/Each";
+import {Each} from "@/common/components/shared-components/Each";
 
 interface CollectionsProps {
   collections: Collection[],
@@ -24,7 +24,8 @@ export const CollectionList = (props: CollectionsProps) => {
     router.push(pathname + '?' + params.toString())
   }
 
-  return <div className={'flex gap-3 mb-10 overflow-auto max-w-[100%] pb-1'}>
+  return <div className={'flex gap-3 mb-10 overflow-auto max-w-[100%] pb-1'}
+  style={{maxWidth:"100%",overflowX:"auto",paddingBottom:4}}>
     {!isSearch && <Button
         onClick={() => handleChooseCollection()}
         variant={!searchParams.get('collection') ? "default" : "secondary"}

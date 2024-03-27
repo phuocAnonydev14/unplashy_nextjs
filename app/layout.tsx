@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
-import {Footer, Header} from "@/app/common/layouts/MainLayouts/components";
+import {Footer, Header} from "@/common/layouts/MainLayouts/components";
 import {PropsWithChildren} from "react";
 import { cn } from "@/lib/utils"
 

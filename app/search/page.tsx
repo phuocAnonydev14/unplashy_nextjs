@@ -1,16 +1,16 @@
 'use client'
 
-import {SearchInput} from "@/app/search/components/SearchInput";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useDebounce} from "@/app/common/hooks/useDebounce";
+import {useDebounce} from "@/common/hooks/useDebounce";
 import {Separator} from "@/components/ui/separator";
-import {CategoryEnum} from "@/app/common/enums/CategoryEnum";
-import {useSearch} from "@/app/search/useSearch";
-import {PhotoGallery} from "@/app/common/components/PhotoGallery";
-import {CollectionList} from "@/app/common/components/CollectionList";
-import {UnsplashService} from "@/app/common/services/unsplash";
+import {CategoryEnum} from "@/common/enums/CategoryEnum";
+import {PhotoGallery} from "@/common/components/PhotoGallery";
+import {CollectionList} from "@/common/components/CollectionList";
+import {UnsplashService} from "@/common/services/unsplash";
 import {Basic} from "unsplash-js/src/methods/photos/types";
+import {SearchInput} from "@/app/search/components/SearchInput";
+import {useSearch} from "@/app/search/useSearch";
 
 export default function SearchPage() {
   const [{
@@ -18,8 +18,7 @@ export default function SearchPage() {
     value: searchVal,
     loading
   }, {setValue: setSearchVal, setDebouncedValue}] = useDebounce('', 1000)
-  const [selectedCate, setSelectedCate] = useState<CategoryEnum>(CategoryEnum.PHOTO)
-  const [{searchResults, searchCollectionResults}, {handleSearch}] = useSearch(debouncedSearchVal, selectedCate)
+  const [{searchResults, searchCollectionResults}, {handleSearch}] = useSearch(debouncedSearchVal)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -55,7 +54,7 @@ export default function SearchPage() {
           {/*</Button>*/}
         </div>)}
     </div>
-    <div className={' py-20 sm:px-16  md:px-20 xl:px-56 px-10'}>
+    <div className={' py-20 sm:px-16  md:px-20 xl:px-56 px-5'}>
       {searchResults &&
           <>
               <div className={'flex justify-center'}>

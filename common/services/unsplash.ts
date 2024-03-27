@@ -1,7 +1,7 @@
-import {unsplash} from "@/app/common/configs/unplashConfig";
-import {defineCancelApiObject} from "@/app/common/configs/axiosUtils";
-import {Pagination} from "@/app/common/types/Pagination.type";
-import {CategoryEnum} from "@/app/common/enums/CategoryEnum";
+import {unsplash} from "@/common/configs/unplashConfig";
+import {defineCancelApiObject} from "@/common/configs/axiosUtils";
+import {Pagination} from "@/common/types/Pagination.type";
+import {CategoryEnum} from "@/common/enums/CategoryEnum";
 
 interface SearchParams extends Pagination {
   query: string

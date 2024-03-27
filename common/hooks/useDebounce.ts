@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import {useRouter, useSearchParams} from "next/navigation";
 
 export function useDebounce<T>(
   initialValue: T,

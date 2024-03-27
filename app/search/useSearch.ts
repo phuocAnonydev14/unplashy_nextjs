@@ -1,8 +1,8 @@
-import {CategoryEnum} from "@/app/common/enums/CategoryEnum";
-import {UnsplashService} from "@/app/common/services/unsplash";
+import {CategoryEnum} from "@/common/enums/CategoryEnum";
+import {UnsplashService} from "@/common/services/unsplash";
 import {useState} from "react";
 
-export const useSearch = (query: string, category: CategoryEnum) => {
+export const useSearch = (query: string) => {
 
   const [searchResults, setSearchResults] = useState<any>()
   const [searchCollectionResults, setSearchCollectionResults] = useState<any>()

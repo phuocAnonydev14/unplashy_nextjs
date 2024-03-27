@@ -1,11 +1,11 @@
 'use client'
 import {useParams} from "next/navigation";
-import useRequest from "@/app/common/hooks/useApiRequest";
-import {GetCollectionPhotoQueries, UnsplashService} from "@/app/common/services/unsplash";
+import useRequest from "@/common/hooks/useApiRequest";
+import {GetCollectionPhotoQueries, UnsplashService} from "@/common/services/unsplash";
 import {useEffect} from "react";
 import {Basic} from "unsplash-js/src/methods/photos/types";
-import {PhotoGallery} from "@/app/common/components/PhotoGallery";
-import {Collection} from "@/app/common/types/Collection.type";
+import {PhotoGallery} from "@/common/components/PhotoGallery";
+import {Collection} from "@/common/types/Collection.type";
 
 export default function CollectionDetail() {
   const {collectionId} = useParams()
