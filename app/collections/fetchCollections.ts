@@ -8,7 +8,7 @@ export const handleFetchCollectionsPhotos = async (page: number = 1) => {
     await Promise.all(collections.map(async collection => {
       const collectionPhotos = (await UnsplashService.getCollectionPhotos({
         collectionId: collection.id,
-        page: 2,
+        page: 1,
         perPage: 10
       }))?.results || []
       collectionsPhotos.push({...collection, photos: collectionPhotos})

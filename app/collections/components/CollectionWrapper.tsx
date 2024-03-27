@@ -15,6 +15,7 @@ import {
 import {useEffect, useState} from "react";
 import {handleFetchCollectionsPhotos} from "@/app/collections/fetchCollections";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
+import {EmptyData} from "@/common/components/shared-components/EmptyData";
 
 export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: CollectionPhotos[] }) => {
   const [page, setPage] = useState(1)
@@ -39,28 +40,31 @@ export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: Coll
         render={(collectionPhotos) => <CollectionBox collectionPhotos={collectionPhotos}/>}
         of={collectionPhotoMapper}
       />
-
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" onClick={() => setPage(page - 1)}/>
-          </PaginationItem>
-          {...Array.from({length:isMobile ? 2 : 9}).map((_, i) => (
-            <PaginationItem key={i}>
-              <PaginationLink
-                isActive={page === i + 1}
-                href="#"
-                onClick={() => setPage(i + 1)}>{i + 1}
-              </PaginationLink>
-            </PaginationItem>))}
-          <PaginationItem>
-            <PaginationEllipsis/>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" onClick={() => setPage(page + 1)}/>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {collectionPhotoMapper?.length > 0 ?
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" onClick={() => setPage(page - 1)}/>
+            </PaginationItem>
+            {...Array.from({length: isMobile ? 2 : 9}).map((_, i) => (
+              <PaginationItem key={i}>
+                <PaginationLink
+                  isActive={page === i + 1}
+                  href="#"
+                  onClick={() => setPage(i + 1)}>{i + 1}
+                </PaginationLink>
+              </PaginationItem>))}
+            <PaginationItem>
+              <PaginationEllipsis/>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" onClick={() => setPage(page + 1)}/>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+        :
+        <EmptyData/>
+      }
     </div>
   )
 }
