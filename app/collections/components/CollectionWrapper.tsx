@@ -14,10 +14,12 @@ import {
 } from "@/components/ui/pagination"
 import {useEffect, useState} from "react";
 import {handleFetchCollectionsPhotos} from "@/app/collections/fetchCollections";
+import useMediaQuery from "@/common/hooks/useMediaQuery";
 
 export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: CollectionPhotos[] }) => {
   const [page, setPage] = useState(1)
   const [collectionPhotoMapper, setCollectionPhotoMapper] = useState<CollectionPhotos[]>([])
+  const isMobile = useMediaQuery("(max-width: 928px)")
 
   useEffect(() => {
     setCollectionPhotoMapper(collectionsPhotos)
@@ -43,7 +45,7 @@ export const CollectionWrapper = ({collectionsPhotos}: { collectionsPhotos: Coll
           <PaginationItem>
             <PaginationPrevious href="#" onClick={() => setPage(page - 1)}/>
           </PaginationItem>
-          {...Array.from({length: 9}).map((_, i) => (
+          {...Array.from({length:isMobile ? 2 : 9}).map((_, i) => (
             <PaginationItem key={i}>
               <PaginationLink
                 isActive={page === i + 1}

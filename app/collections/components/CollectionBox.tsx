@@ -72,7 +72,7 @@ export function CollectionBox(props: CollectionBoxProps) {
                 <path d="m12.718 4.707-1.413-1.415L2.585 12l8.72 8.707 1.413-1.415L6.417 13H20v-2H6.416l6.302-6.293z"/>
             </svg>
         </Button>}
-    <div style={{scrollBehavior: "smooth"}} ref={containerRef} className={'flex gap-4 overflow-x-hidden'}>
+    <div style={{scrollBehavior: "smooth"}} ref={containerRef} className={'flex gap-4 overflow-x-auto pb-2'}>
       <Each
         render={({urls: {small}, alt_description}) => {
           return <img src={small} alt={alt_description || ''}
