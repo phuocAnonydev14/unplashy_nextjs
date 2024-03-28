@@ -5,14 +5,13 @@ import {Basic} from "unsplash-js/src/methods/photos/types";
 import {useCallback, useEffect, useState} from "react";
 import {UnsplashService} from "@/common/services/unsplash";
 import {useInView} from "react-intersection-observer";
-import {Skeleton} from "@/components/ui/skeleton";
 import {useSearchParams} from "next/navigation";
 import useRequest from "@/common/hooks/useApiRequest";
-import {Each} from "@/components/shared-components/Each";
 import {PhotoDetailModal} from "@/components/PhotoDetailModal";
 import {EmptyData} from "@/components/shared-components/EmptyData";
 import useMediaQuery from "@/common/hooks/useMediaQuery";
 import {useToast} from "@/components/ui/use-toast";
+import {SkeletonLoading} from "@/components/shared-components/SkeletonLoading";
 
 const breakPoints = {
   default: 3,
@@ -38,10 +37,9 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const [, doGetPhotos] = useRequest(UnsplashService.getPhotos)
   const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos)
   const searchParams = useSearchParams()
-  const isMobile = useMediaQuery("(max-width: 768px)")
   const collection = searchParams.get('collection') || collectionId
   const {ref, inView} = useInView()
-  const { toast } = useToast()
+  const {toast} = useToast()
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return
@@ -147,34 +145,12 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
         ?
         <div>
           {!isEndPagination && <div ref={ref} className={'flex gap-3 flex-wrap'} style={{flexWrap: "wrap"}}>
-              <Each<number>
-                  render={(item, index) =>
-                    <div key={item} className="flex flex-col space-y-4">
-                      <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"
-                                style={{minHeight: "325px", width: isMobile ? "300px" : "420px"}}/>
-                    </div>}
-                  of={Array.from({length: 3})}
-              >
-              </Each>
+              <SkeletonLoading/>
           </div>}
         </div>
         :
         <EmptyData/>
     }
-
-    <div ref={ref} className={'flex gap-3 flex-wrap'}>
-      {<Each<number>
-        render={(item, index) =>
-          <div key={item} className="flex flex-col space-y-3">
-            <Skeleton className="min-h-[325px] min-w-[420px] rounded-xl"/>
-          </div>}
-        of={Array.from({length: 3})}
-      >
-      </Each>
-      }
-    </div>
-
-
     {
       isOpenDetail && <PhotoDetailModal photoId={isOpenDetail} onClose={() => setIsOpenDetail('')}/>
     }
