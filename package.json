@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier:format": "prettier --write .",
+    "prettier:check": "prettier --check \"**/*.{ts,tsx,json}\"",
+    "eslint:format": "eslint src --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -28,6 +31,7 @@
     "nextjs-toploader": "^1.6.11",
     "npx": "^10.2.2",
     "pagination": "^0.4.6",
+    "prettier": "^3.2.5",
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.8.1",

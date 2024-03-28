@@ -1,24 +1,26 @@
-.container:hover .arrowLeft, .container:hover .arrowRight{
-    opacity: 1;
+.container:hover .arrowLeft,
+.container:hover .arrowRight {
+  opacity: 1;
 }
 
-.arrowLeft, .arrowRight {
-    position: absolute;
-    top: 50%;
-    z-index: 999;
-    /*padding: 18px 10px;*/
-    border-radius: 50%;
-    background-color: rgba(255, 254, 254, 0.27);
-    opacity: 0;
-    transition: all .25s ease;
+.arrowLeft,
+.arrowRight {
+  position: absolute;
+  top: 50%;
+  z-index: 999;
+  /*padding: 18px 10px;*/
+  border-radius: 50%;
+  background-color: rgba(255, 254, 254, 0.27);
+  opacity: 0;
+  transition: all 0.25s ease;
 }
 
-.arrowLeft{
-    left: -30px;
+.arrowLeft {
+  left: -30px;
 }
 
-.arrowRight{
-    right: -30px;
+.arrowRight {
+  right: -30px;
 }
 
 /*.divider{*/

@@ -1,9 +1,9 @@
-import {Basic} from "unsplash-js/src/methods/photos/types";
+import { Basic } from 'unsplash-js/src/methods/photos/types';
 
 export interface Collection {
-  id: string,
-  title: string,
-  description: string,
+  id: string;
+  title: string;
+  description: string;
 }
 
 export interface CollectionPhotos {

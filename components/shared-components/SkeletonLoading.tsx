@@ -1,19 +1,22 @@
-'use client'
-import {Each} from "@/components/shared-components/Each";
-import {Skeleton} from "@/components/ui/skeleton";
-import useMediaQuery from "@/common/hooks/useMediaQuery";
+'use client';
+import { Each } from '@/components/shared-components/Each';
+import { Skeleton } from '@/components/ui/skeleton';
+import useMediaQuery from '@/common/hooks/useMediaQuery';
 
 export const SkeletonLoading = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)")
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
-
-  return <Each<number>
-    render={(item, index) =>
-      <div key={item} className="flex flex-col space-y-4">
-        <Skeleton className="min-h-[300px] min-w-[420px] rounded-xl mt-2"
-                  style={{minHeight: "300px", width: isMobile ? "300px" : "420px"}}/>
-      </div>}
-    of={Array.from({length: 3})}
-  >
-  </Each>
-}
+  return (
+    <Each<number>
+      render={(item, index) => (
+        <div key={item} className="flex flex-col space-y-4">
+          <Skeleton
+            className="min-h-[300px] min-w-[420px] rounded-xl mt-2"
+            style={{ minHeight: '300px', width: isMobile ? '300px' : '420px' }}
+          />
+        </div>
+      )}
+      of={Array.from({ length: 3 })}
+    ></Each>
+  );
+};

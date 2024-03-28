@@ -1,1 +1,1 @@
-declare module 'react-unsplash-grid-gallery'
+declare module 'react-unsplash-grid-gallery';

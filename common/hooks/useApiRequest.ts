@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 type Callback = (...args: any[]) => any;
 
@@ -9,7 +9,7 @@ const useRequest = <T, K>(fn: Callback) => {
   const caller = async (args: K): Promise<any> => {
     setData(undefined);
     setError(undefined);
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fn(args);
       setData(() => response);
@@ -19,7 +19,7 @@ const useRequest = <T, K>(fn: Callback) => {
       setError(() => error);
       throw error;
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -28,7 +28,7 @@ const useRequest = <T, K>(fn: Callback) => {
     setError(undefined);
   };
 
-  return [{data, error, loading}, caller, reset] as const;
+  return [{ data, error, loading }, caller, reset] as const;
 };
 
 export default useRequest;

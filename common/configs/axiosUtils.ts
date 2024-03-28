@@ -1,24 +1,23 @@
 export function defineCancelApiObject(apiObject: Record<string, Function>) {
-  const cancelApiObject: Record<string, any> = {}
-
+  const cancelApiObject: Record<string, any> = {};
 
   Object.getOwnPropertyNames(apiObject).forEach((apiPropertyName) => {
     const cancellationControllerObject: { controller: AbortController | undefined } = {
-      controller: undefined,
-    }
+      controller: undefined
+    };
 
     cancelApiObject[apiPropertyName] = {
       handleRequestCancellation: () => {
         if (cancellationControllerObject.controller) {
           // canceling the request and returning this custom message
-          cancellationControllerObject.controller.abort()
+          cancellationControllerObject.controller.abort();
         }
-        cancellationControllerObject.controller = new AbortController()
+        cancellationControllerObject.controller = new AbortController();
 
-        return cancellationControllerObject.controller
-      },
-    }
-  })
+        return cancellationControllerObject.controller;
+      }
+    };
+  });
 
-  return cancelApiObject
+  return cancelApiObject;
 }
