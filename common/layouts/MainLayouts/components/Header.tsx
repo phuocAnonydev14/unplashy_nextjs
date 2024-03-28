@@ -33,8 +33,8 @@ interface HeaderProps {
 export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: HeaderProps) => {
   return (
     <div
-      style={{ width: '60%' }}
-      className={`flex  ${isResponsive ? 'flex-col-reverse items-start' : 'flex'} ${isResponsive ? 'justify-start' : 'justify-between'} md:hidden gap-10  font-[500] sm:hidden`}
+      style={{ width: isResponsive ? '100%' : '60%', gap: '20px' }}
+      className={`flex  ${isResponsive ? 'flex-col-reverse items-start' : 'flex'} ${isResponsive ? 'justify-start' : 'justify-between'} md:hidden gap-20  font-[500] sm:hidden`}
     >
       <div
         className={`flex ${isResponsive && 'flex-col'} ${isResponsive ? 'items-start' : 'items-center'} gap-4  font-[500] ${styles['menu']} `}

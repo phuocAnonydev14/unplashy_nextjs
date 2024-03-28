@@ -57,8 +57,9 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
       open={!!photoId}
       onClose={onClose}
     >
+      <p className={'font-semibold'}>Photo</p>
       <div
-        className={'md:w-full w-[70%] flex justify-center flex-col items-center'}
+        className={'md:w-full flex justify-center flex-col items-center'}
         style={{ marginTop: '10px' }}
       >
         <LazyLoadImage
