@@ -56,7 +56,7 @@ export default function SearchPage() {
         ))}
       </div>
       <div className={' py-10 sm:px-16  md:px-20 xl:px-56 px-5'}>
-        {searchResults && (
+        {!loading && searchResults && (
           <>
             <div className={'flex justify-center mb-1'}>
               <CollectionList isSearch={true} collections={searchCollectionResults} />
