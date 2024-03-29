@@ -6,11 +6,11 @@ import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenNib, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { UnsplashService } from '@/common/services/unsplash';
 import useMediaQuery from '@/common/hooks/useMediaQuery';
 import { useToast } from '@/components/ui/use-toast';
 import useRequest from '@/common/hooks/useApiRequest';
+import Image from 'next/image';
 
 interface PhotoDetailModal {
   photoId: string;
@@ -42,7 +42,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
     })();
   }, [photoId]);
 
-  if (!photoId || loading) return;
+  if (!photo || loading) return;
   return (
     <Modal
       styles={{
@@ -62,7 +62,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
         className={'md:w-full flex justify-center flex-col items-center'}
         style={{ marginTop: '10px' }}
       >
-        <LazyLoadImage
+        <Image
           src={photo?.urls?.full || '/images/default-img.png'}
           alt={photo?.alt_description || ''}
           style={{
@@ -71,6 +71,8 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
             objectFit: 'cover',
             width: isMobile ? '100%' : '70%'
           }}
+          width={800}
+          height={600}
         />
         <div
           className={'items-start mt-6 flex flex-col gap-3'}
