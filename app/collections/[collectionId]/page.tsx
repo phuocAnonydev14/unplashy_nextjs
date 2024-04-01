@@ -51,7 +51,7 @@ export default async function CollectionDetail(props: CollectionDetailProps) {
         />
       ) : (
         <>
-          <p>No data</p>
+          <p className={'text-center font-semibold'}>No data</p>
         </>
       )}
     </div>

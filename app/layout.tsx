@@ -6,6 +6,7 @@ import { PropsWithChildren } from 'react';
 import { cn } from '@/lib/utils';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from '@/components/ui/toaster';
+import { Web3Provider } from '@/common/providers/Web3Provider';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -24,9 +25,11 @@ export default function RootLayout(props: PropsWithChildren) {
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <NextTopLoader />
         <Toaster />
-        <Header />
-        {children}
-        <Footer />
+        <Web3Provider>
+          <Header />
+          {children}
+          <Footer />
+        </Web3Provider>
       </body>
     </html>
   );

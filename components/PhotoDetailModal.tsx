@@ -64,7 +64,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
       >
         <Image
           src={photo?.urls?.full || '/images/default-img.png'}
-          alt={photo?.alt_description || ''}
+          alt={photo?.alt_description || 'User image'}
           style={{
             height: '70dvh',
             borderRadius: '8px',
