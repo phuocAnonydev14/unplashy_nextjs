@@ -6,10 +6,10 @@ import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenNib, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { unsplashService } from '@/common/services/unsplash';
-import useMediaQuery from '@/common/hooks/useMediaQuery';
+import { unsplashService } from '@/services/unsplash';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { useToast } from '@/components/ui/use-toast';
-import useRequest from '@/common/hooks/useApiRequest';
+import useRequest from '@/hooks/useApiRequest';
 import Image from 'next/image';
 
 interface PhotoDetailModal {

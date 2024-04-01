@@ -1,5 +1,5 @@
 'use client';
-import { Collection } from '@/common/types/Collection.type';
+import { Collection } from '@/types/Collection.type';
 import { Button } from '@/components/ui/button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Each } from '@/components/shared-components/Each';
@@ -26,15 +26,15 @@ export const CollectionList = (props: CollectionsProps) => {
 
   return (
     <div
-      className={'flex gap-3 mb-10 overflow-auto max-w-[100%] pb-1'}
+      className="flex gap-3 mb-10 overflow-auto max-w-[100%] pb-1"
       style={{ maxWidth: '100%', overflowX: 'auto', paddingBottom: 4 }}
     >
       {!isSearch && (
         <Button
           onClick={() => handleChooseCollection()}
           variant={!searchParams.get('collection') ? 'default' : 'secondary'}
-          className={''}
-          key={'discover'}
+          className=""
+          key="discover"
         >
           Discover
         </Button>
@@ -45,7 +45,7 @@ export const CollectionList = (props: CollectionsProps) => {
             <Button
               onClick={() => handleChooseCollection(id)}
               variant={searchParams.get('collection') === id ? 'default' : 'secondary'}
-              className={''}
+              className=""
               key={id}
             >
               {title}

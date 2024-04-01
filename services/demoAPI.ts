@@ -1,5 +1,5 @@
-import { api } from '@/common/configs/axiosConfigs';
-import { defineCancelApiObject } from '@/common/configs/axiosUtils';
+import { api } from '@/configs/axiosConfigs';
+import { defineCancelApiObject } from '@/configs/axiosUtils';
 
 export const ProductAPI = {
   get: async function (id: string, cancel = false) {

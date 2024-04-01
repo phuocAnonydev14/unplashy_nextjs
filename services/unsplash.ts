@@ -1,8 +1,8 @@
-import { defineCancelApiObject } from '@/common/configs/axiosUtils';
-import { Pagination } from '@/common/types/Pagination.type';
-import { CategoryEnum } from '@/common/enums/CategoryEnum';
+import { defineCancelApiObject } from '@/configs/axiosUtils';
+import { Pagination } from '@/types/Pagination.type';
+import { CategoryEnum } from '@/enums/CategoryEnum';
 import { createApi } from 'unsplash-js';
-import { UNSPLASH_ACCESS_KEY } from '@/common/constants/unsplash';
+import { UNSPLASH_ACCESS_KEY } from '@/constants/unsplash';
 
 interface SearchParams extends Pagination {
   query: string;

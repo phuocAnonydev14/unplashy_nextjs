@@ -1,7 +1,7 @@
 'use client';
 import { Each } from '@/components/shared-components/Each';
 import { Skeleton } from '@/components/ui/skeleton';
-import useMediaQuery from '@/common/hooks/useMediaQuery';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 export const SkeletonLoading = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');

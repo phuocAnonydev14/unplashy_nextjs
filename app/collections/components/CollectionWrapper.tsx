@@ -1,6 +1,6 @@
 'use client';
 
-import { CollectionPhotos } from '@/common/types/Collection.type';
+import { CollectionPhotos } from '@/types/Collection.type';
 import { CollectionBox } from '@/app/collections/components/CollectionBox';
 import { Each } from '@/components/shared-components/Each';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/pagination';
 import { useEffect, useState } from 'react';
 import { handleFetchCollectionsPhotos } from '@/app/collections/fetchCollections';
-import useMediaQuery from '@/common/hooks/useMediaQuery';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { EmptyData } from '@/components/shared-components/EmptyData';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -50,7 +50,7 @@ export const CollectionWrapper = ({
   }, [page]);
 
   return (
-    <div className={'mb-6'}>
+    <div className="mb-6">
       <Each<CollectionPhotos>
         render={(collectionPhotos) => <CollectionBox collectionPhotos={collectionPhotos} />}
         of={collectionPhotoMapper}

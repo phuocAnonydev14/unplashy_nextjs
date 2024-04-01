@@ -1,5 +1,5 @@
-import { Collection, CollectionPhotos } from '@/common/types/Collection.type';
-import { unsplashService } from '@/common/services/unsplash';
+import { Collection, CollectionPhotos } from '@/types/Collection.type';
+import { unsplashService } from '@/services/unsplash';
 
 export const handleFetchCollectionsPhotos = async (page: number = 1) => {
   try {

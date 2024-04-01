@@ -3,10 +3,10 @@
 import Masonry from 'react-masonry-css';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { useCallback, useEffect, useState } from 'react';
-import { unsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/services/unsplash';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
-import useRequest from '@/common/hooks/useApiRequest';
+import useRequest from '@/hooks/useApiRequest';
 import { PhotoDetailModal } from '@/components/PhotoDetailModal';
 import { EmptyData } from '@/components/shared-components/EmptyData';
 import { useToast } from '@/components/ui/use-toast';

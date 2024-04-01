@@ -1,4 +1,4 @@
-import { UnsplashService } from '@/common/services/unsplash';
+import { UnsplashService } from '@/services/unsplash';
 
 export function defineCancelApiObject(apiObject: UnsplashService | Record<string, any>) {
   const cancelApiObject: { [key: string]: { handleRequestCancellation: () => AbortController } } =

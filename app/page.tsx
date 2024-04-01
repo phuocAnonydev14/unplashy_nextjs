@@ -1,4 +1,4 @@
-import { unsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/services/unsplash';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { CollectionList } from '@/components/CollectionList';
 

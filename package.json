@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check \"**/*.{ts,tsx,json}\"",
-    "eslint:format": "eslint src --fix"
+    "eslint:format": "eslint app --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

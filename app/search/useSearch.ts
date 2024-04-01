@@ -1,5 +1,5 @@
-import { CategoryEnum } from '@/common/enums/CategoryEnum';
-import { unsplashService } from '@/common/services/unsplash';
+import { CategoryEnum } from '@/enums/CategoryEnum';
+import { unsplashService } from '@/services/unsplash';
 import { useState } from 'react';
 
 export const useSearch = (query: string) => {

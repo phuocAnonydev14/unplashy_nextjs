@@ -5,8 +5,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { HeaderConTent } from '@/common/layouts/MainLayouts/components/Header';
-import useMediaQuery from '@/common/hooks/useMediaQuery';
+import { HeaderConTent } from '@/components/Header';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { usePathname } from 'next/navigation';
 
 export const HeaderResponsive = () => {

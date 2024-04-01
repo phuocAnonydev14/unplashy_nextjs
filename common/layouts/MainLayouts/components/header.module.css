@@ -1,8 +1,0 @@
-.menu span:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.active {
-  color: #7aa2e3 !important;
-}

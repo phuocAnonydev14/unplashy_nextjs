@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { HeaderQuickSearch } from '@/common/layouts/MainLayouts/components/HeaderQuickSearch';
-import styles from './header.module.css';
+import { HeaderQuickSearch } from '@/components/HeaderQuickSearch';
 import Link from 'next/link';
-import { HeaderResponsive } from '@/common/layouts/MainLayouts/components/HeaderResponsive';
+import { HeaderResponsive } from '@/components/HeaderResponsive';
 
 const menuItems = [
   {
@@ -33,19 +32,18 @@ interface HeaderProps {
 export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: HeaderProps) => {
   return (
     <div
-      style={{ width: isResponsive ? '100%' : '60%', gap: '20px' }}
-      className={`flex  ${isResponsive ? 'flex-col-reverse items-start' : 'flex'} ${isResponsive ? 'justify-start' : 'justify-between'} md:hidden gap-20  font-[500] sm:hidden`}
+      className={`flex ${isResponsive ? 'justify-start' : 'justify-between'}  gap-20  font-[500] sm:hidden md:hidden ${isResponsive ? 'flex-col-reverse items-start' : 'xl:flex'} gap-[20px] ${isResponsive ? 'w-full' : 'w-3/5'}`}
     >
       <div
-        className={`flex ${isResponsive && 'flex-col'} ${isResponsive ? 'items-start' : 'items-center'} gap-4  font-[500] ${styles['menu']} `}
+        className={`flex ${isResponsive && 'flex-col'} ${isResponsive ? 'items-start' : 'items-center'} gap-4  font-[500]`}
       >
         {menuItems.map(({ title, href }, index) => {
           return (
-            <span key={title}>
+            <span key={title} className={'hover:underline cursor-pointer text-[#707070]'}>
               <Link
                 onClick={() => onCloseModal && onCloseModal()}
                 href={!href ? '/' : href}
-                className={`${index <= 1 && activeMenu?.endsWith(href as string) && styles.active}`}
+                className={`${index <= 1 && activeMenu?.endsWith(href as string) && 'text-black'}`}
               >
                 {title}
               </Link>
@@ -78,8 +76,8 @@ export const Header = () => {
   return (
     <>
       <div
-        className={'mb-1 px-2 flex justify-between items-center sticky top-0 bg-[#fff] z-40'}
-        style={{ boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px', paddingInline: '2rem' }}
+        className={'mb-1 flex justify-between items-center sticky top-0 bg-[#fff] z-40 px-[2rem]'}
+        style={{ boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px' }}
       >
         <Link href={'/'}>
           <Image src={'/images/logo.png'} alt={'Logo'} width={80} height={80} />
