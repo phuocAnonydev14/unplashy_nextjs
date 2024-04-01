@@ -41,7 +41,7 @@ export function CollectionBox(props: CollectionBoxProps) {
       const container = containerRef.current;
       if (container) {
         setShowLeftArrow(container.scrollLeft > 0);
-        setShowRightArrow(container.scrollLeft < container.scrollWidth - container.clientWidth);
+        setShowRightArrow(container.scrollLeft + 1 < container.scrollWidth - container.clientWidth);
       }
     };
 
@@ -83,11 +83,7 @@ export function CollectionBox(props: CollectionBoxProps) {
           </svg>
         </Button>
       )}
-      <div
-        style={{ scrollBehavior: 'smooth' }}
-        ref={containerRef}
-        className="flex gap-4 overflow-x-auto pb-2"
-      >
+      <div ref={containerRef} className="flex gap-4 overflow-x-auto pb-2 scroll-smooth">
         <Each
           render={({ urls: { small }, alt_description }) => {
             return (
