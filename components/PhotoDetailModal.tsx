@@ -11,14 +11,16 @@ import useMediaQuery from '@/hooks/useMediaQuery';
 import { useToast } from '@/components/ui/use-toast';
 import useRequest from '@/hooks/useApiRequest';
 import Image from 'next/image';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface PhotoDetailModal {
   photoId: string;
   onClose: () => void;
+  presetUrl: string;
 }
 
 export const PhotoDetailModal = (props: PhotoDetailModal) => {
-  const { photoId, onClose } = props;
+  const { photoId, onClose, presetUrl } = props;
   const [photo, setPhoto] = useState<Basic>();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { toast } = useToast();
@@ -44,63 +46,70 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
 
   if (!photo || loading) return;
   return (
-    <Modal
-      styles={{
-        modal: {
-          maxWidth: '80dvw',
-          width: '80dvw',
-          maxHeight: '90dvh',
-          height: '90dvh',
-          overflow: 'auto'
-        }
-      }}
-      open={!!photoId}
-      onClose={onClose}
-    >
-      <p className={'font-semibold'}>Photo</p>
-      <div
-        className={'md:w-full flex justify-center flex-col items-center'}
-        style={{ marginTop: '10px' }}
-      >
-        <Image
-          src={photo?.urls?.full || '/images/default-img.png'}
-          alt={photo?.alt_description || ''}
-          style={{
-            height: '70dvh',
-            borderRadius: '8px',
-            objectFit: 'cover',
-            width: isMobile ? '100%' : '70%'
-          }}
-          width={800}
-          height={600}
-        />
-        <div
-          className={'items-start mt-6 flex flex-col gap-3'}
-          style={{ width: isMobile ? '100%' : '70%' }}
-        >
-          {photo?.user?.name && (
-            <h1 style={{ fontSize: '20px', fontWeight: 500 }}>
-              <FontAwesomeIcon icon={faUser} className={'mr-2'} />
-              {photo?.user?.name}
-            </h1>
-          )}
-          {photo?.user?.bio && (
-            <p>
-              <FontAwesomeIcon icon={faPenNib} className={'mr-2'} />
-              {photo?.user?.bio}
-            </p>
-          )}
-          {photo?.user?.twitter_username && (
-            <p>
-              <FontAwesomeIcon icon={faTwitter} className={'mr-2'} />
-              {photo?.user?.twitter_username}
-            </p>
-          )}
-          <a href={photo?.user?.portfolio_url || ''} style={{ textDecoration: 'underline' }}>
-            Portfolio url
-          </a>
+    // <Modal
+    //   styles={{
+    //     modal: {
+    //       maxWidth: '80dvw',
+    //       width: '80dvw',
+    //       maxHeight: '90dvh',
+    //       height: '90dvh',
+    //       overflow: 'auto'
+    //     }
+    //   }}
+    //   open={!!photoId}
+    //   onClose={onClose}
+    // >
+    <Dialog open={!!photoId} onOpenChange={onClose}>
+      <DialogContent className="h-[96dvh] overflow-auto w-full min-w-[70dvw]">
+        <div>
+          <div
+            className="md:w-full flex justify-center flex-col items-center"
+            style={{ marginTop: '10px' }}
+          >
+            <Image
+              placeholder="blur"
+              src={presetUrl}
+              alt={photo?.alt_description || ''}
+              style={{
+                height: '80dvh',
+                borderRadius: '8px',
+                objectFit: 'cover',
+                width: isMobile ? '100%' : '46%'
+              }}
+              width={400}
+              height={800}
+              blurDataURL={presetUrl}
+            />
+            <div
+              className="items-start mt-6 flex flex-col gap-3"
+              style={{ width: isMobile ? '100%' : '70%' }}
+            >
+              {photo?.user?.name && (
+                <h1 style={{ fontSize: '20px', fontWeight: 500 }}>
+                  <FontAwesomeIcon icon={faUser} className="mr-2" />
+                  {photo?.user?.name}
+                </h1>
+              )}
+              {photo?.user?.bio && (
+                <p>
+                  <FontAwesomeIcon icon={faPenNib} className="mr-2" />
+                  {photo?.user?.bio}
+                </p>
+              )}
+              {photo?.user?.twitter_username && (
+                <p>
+                  <FontAwesomeIcon icon={faTwitter} className="mr-2" />
+                  {photo?.user?.twitter_username}
+                </p>
+              )}
+              <a href={photo?.user?.portfolio_url || ''} style={{ textDecoration: 'underline' }}>
+                Portfolio url
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
+    // </Modal>
   );
 };

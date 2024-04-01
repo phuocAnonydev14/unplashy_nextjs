@@ -69,7 +69,7 @@ export const CollectionList = (props: CollectionsProps) => {
           onClick={() => handleScroll(-200)}
         >
           <FontAwesomeIcon
-            size="xl"
+            size="lg"
             className="opacity-50 hover:opacity-100 cursor-pointer"
             icon={faAngleLeft}
           />
@@ -111,11 +111,11 @@ export const CollectionList = (props: CollectionsProps) => {
             background:
               'linear-gradient(90deg, rgba(255,253,253,0.06214985994397759) 0%, rgba(255,255,255,0.8632703081232493) 14%, rgba(255,255,255,1) 100%)'
           }}
-          className="absolute right-[-40px] top-[-6px] w-28 h-14 rounded-bl flex items-center justify-center  transition-opacity"
+          className="absolute right-[-44px] top-[-6px] w-32 h-14 rounded-bl flex items-center justify-center  transition-opacity"
           onClick={() => handleScroll(200)}
         >
           <FontAwesomeIcon
-            size="xl"
+            size="lg"
             className="opacity-50 hover:opacity-100 cursor-pointer"
             icon={faAngleRight}
           />
