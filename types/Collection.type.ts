@@ -11,4 +11,9 @@ export interface CollectionPhotos {
   id: string;
   title: string;
   description: string;
+  user: { last_name: string; first_name: string };
+  total_photos: number;
+  tags: { title: string }[];
+  cover_photo: { urls: { small: string } };
+  preview_photos: Basic[];
 }

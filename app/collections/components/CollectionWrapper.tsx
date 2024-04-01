@@ -32,6 +32,8 @@ export const CollectionWrapper = ({
     setCollectionPhotoMapper(collectionsPhotos);
   }, [collectionsPhotos]);
 
+  console.log(collectionPhotoMapper);
+
   useEffect(() => {
     if (page === 1) return;
     (async () => {
@@ -51,10 +53,12 @@ export const CollectionWrapper = ({
 
   return (
     <div className="mb-6">
-      <Each<CollectionPhotos>
-        render={(collectionPhotos) => <CollectionBox collectionPhotos={collectionPhotos} />}
-        of={collectionPhotoMapper}
-      />
+      <div className="flex flex-wrap gap-[40px]">
+        <Each<CollectionPhotos>
+          render={(collectionPhotos) => <CollectionBox collectionPhotos={collectionPhotos} />}
+          of={collectionPhotoMapper}
+        />
+      </div>
       {collectionPhotoMapper?.length > 0 ? (
         <Pagination>
           <PaginationContent>
