@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { CategoryEnum } from '@/common/enums/CategoryEnum';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { CollectionList } from '@/components/CollectionList';
-import { unsplashService, UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { SearchInput } from '@/app/search/components/SearchInput';
 import { useSearch } from '@/app/search/useSearch';
@@ -19,6 +19,7 @@ export default function SearchPage() {
   ] = useDebounce('', 1000);
   const [{ searchResults, searchCollectionResults }, { handleSearch }] =
     useSearch(debouncedSearchVal);
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

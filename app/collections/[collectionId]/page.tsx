@@ -8,14 +8,34 @@ interface CollectionDetailProps {
   };
 }
 
+async function getCollectionDetail(collectionId: string) {
+  try {
+    const collection = await unsplashService.getCollectionDetail(collectionId);
+    return collection;
+  } catch (e) {
+    console.log('error in get collection detail');
+  }
+  return {};
+}
+
+async function getCollectionPhotos(params: { collectionId: string }) {
+  try {
+    const collectionPhotos = await unsplashService.getCollectionPhotos(params);
+    return collectionPhotos;
+  } catch (e) {
+    console.log('error in get collection photos');
+  }
+  return { results: [] };
+}
+
 export default async function CollectionDetail(props: CollectionDetailProps) {
   const { collectionId } = props.params;
 
   if (!collectionId || typeof collectionId !== 'string') return;
 
   const [collectionPhotos, collection] = await Promise.all([
-    unsplashService.getCollectionPhotos({ collectionId }),
-    unsplashService.getCollectionDetail(collectionId)
+    getCollectionPhotos({ collectionId }),
+    getCollectionDetail(collectionId)
   ]);
 
   if (!collectionPhotos && !collection) return <EmptyData />;
@@ -24,11 +44,15 @@ export default async function CollectionDetail(props: CollectionDetailProps) {
       <h1 className={'text-center font-semibold mb-6'} style={{ fontSize: '1.8rem' }}>
         {collection?.title}
       </h1>
-      {collectionPhotos?.results?.length && (
+      {collectionPhotos?.results?.length ? (
         <PhotoGallery
           images={collectionPhotos?.results || []}
           collectionId={collectionId.toString()}
         />
+      ) : (
+        <>
+          <p>No data</p>
+        </>
       )}
     </div>
   );

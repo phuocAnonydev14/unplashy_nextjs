@@ -11,12 +11,12 @@ export const SkeletonLoading = () => {
       render={(item, index) => (
         <div key={item} className="flex flex-col space-y-4">
           <Skeleton
-            className="min-h-[300px] min-w-[420px] rounded-xl mt-2"
+            className="min-h-[300px] min-w-[400px] rounded-xl mt-2"
             style={{ minHeight: '300px', width: isMobile ? '300px' : '420px' }}
           />
         </div>
       )}
       of={Array.from({ length: 3 })}
-    ></Each>
+    />
   );
 };

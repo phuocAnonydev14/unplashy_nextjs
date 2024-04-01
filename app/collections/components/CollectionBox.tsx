@@ -24,7 +24,7 @@ export function CollectionBox(props: CollectionBoxProps) {
 
   useEffect(() => {
     (async () => {
-      if (photos.length > 10) {
+      if (photos.length > 5) {
         return;
       }
       const photoResponse = await unsplashService.getPhotos({ page: 2, perPage: 120 });

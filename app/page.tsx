@@ -8,10 +8,11 @@ interface HomeProps {
 
 async function getPhotos(collectionId?: string) {
   try {
+    let photos;
     if (collectionId) {
-      return unsplashService.getCollectionPhotos({ collectionId: collectionId });
-    }
-    return unsplashService.getPhotos();
+      photos = await unsplashService.getCollectionPhotos({ collectionId: collectionId });
+    } else photos = await unsplashService.getPhotos();
+    return photos;
   } catch (e) {
     console.log({ e });
   }
@@ -21,7 +22,8 @@ async function getPhotos(collectionId?: string) {
 
 async function getCollections() {
   try {
-    return unsplashService.getCollections();
+    const collections = await unsplashService.getCollections();
+    return collections;
   } catch (e) {
     console.log({ e });
   }
