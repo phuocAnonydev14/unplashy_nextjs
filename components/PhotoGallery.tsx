@@ -3,7 +3,7 @@
 import Masonry from 'react-masonry-css';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { useCallback, useEffect, useState } from 'react';
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
 import useRequest from '@/common/hooks/useApiRequest';
@@ -35,8 +35,8 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const [isOpenDetail, setIsOpenDetail] = useState('');
   const [isEndPagination, setIsEndPagination] = useState(false);
 
-  const [, doGetPhotos] = useRequest(UnsplashService.getPhotos);
-  const [, doGetCollectionPhoto] = useRequest(UnsplashService.getCollectionPhotos);
+  const [, doGetPhotos] = useRequest(unsplashService.getPhotos);
+  const [, doGetCollectionPhoto] = useRequest(unsplashService.getCollectionPhotos);
   const searchParams = useSearchParams();
   const collection = searchParams.get('collection') || collectionId;
   const { ref, inView } = useInView();

@@ -1,5 +1,5 @@
 import { CategoryEnum } from '@/common/enums/CategoryEnum';
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 import { useState } from 'react';
 
 export const useSearch = (query: string) => {
@@ -9,13 +9,13 @@ export const useSearch = (query: string) => {
   const handleSearch = async () => {
     try {
       const [searchPhotoResponse, searchCollectionResponse] = await Promise.all([
-        UnsplashService.search(CategoryEnum.PHOTO, { query }),
-        await UnsplashService.search(CategoryEnum.COLLECTION, { query })
+        unsplashService.search(CategoryEnum.PHOTO, { query }),
+        await unsplashService.search(CategoryEnum.COLLECTION, { query })
       ]);
-      // const searchPhotoResponse = await UnsplashService.search(CategoryEnum.PHOTO, {query})
+      // const searchPhotoResponse = await unsplashService.search(CategoryEnum.PHOTO, {query})
       setSearchResults(searchPhotoResponse?.results || []);
       setSearchCollectionResults(searchCollectionResponse?.results || []);
-      // const searchCollectionResponse = await UnsplashService.search(CategoryEnum.COLLECTION, {query})
+      // const searchCollectionResponse = await unsplashService.search(CategoryEnum.COLLECTION, {query})
     } catch (e) {
       console.log(e);
     }

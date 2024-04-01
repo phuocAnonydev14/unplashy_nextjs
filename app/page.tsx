@@ -1,4 +1,4 @@
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { CollectionList } from '@/components/CollectionList';
 
@@ -9,9 +9,9 @@ interface HomeProps {
 async function getPhotos(collectionId?: string) {
   try {
     if (collectionId) {
-      return UnsplashService.getCollectionPhotos({ collectionId: collectionId });
+      return unsplashService.getCollectionPhotos({ collectionId: collectionId });
     }
-    return UnsplashService.getPhotos();
+    return unsplashService.getPhotos();
   } catch (e) {
     console.log({ e });
   }
@@ -21,7 +21,7 @@ async function getPhotos(collectionId?: string) {
 
 async function getCollections() {
   try {
-    return UnsplashService.getCollections();
+    return unsplashService.getCollections();
   } catch (e) {
     console.log({ e });
   }

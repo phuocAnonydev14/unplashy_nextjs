@@ -1,5 +1,8 @@
-export function defineCancelApiObject(apiObject: Record<string, Function>) {
-  const cancelApiObject: Record<string, any> = {};
+import { UnsplashService } from '@/common/services/unsplash';
+
+export function defineCancelApiObject(apiObject: UnsplashService | Record<string, any>) {
+  const cancelApiObject: { [key: string]: { handleRequestCancellation: () => AbortController } } =
+    {};
 
   Object.getOwnPropertyNames(apiObject).forEach((apiPropertyName) => {
     const cancellationControllerObject: { controller: AbortController | undefined } = {

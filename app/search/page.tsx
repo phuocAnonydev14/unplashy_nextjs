@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { CategoryEnum } from '@/common/enums/CategoryEnum';
 import { PhotoGallery } from '@/components/PhotoGallery';
 import { CollectionList } from '@/components/CollectionList';
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService, UnsplashService } from '@/common/services/unsplash';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { SearchInput } from '@/app/search/components/SearchInput';
 import { useSearch } from '@/app/search/useSearch';
@@ -64,7 +64,7 @@ export default function SearchPage() {
             <PhotoGallery
               searchAction={async (page: number) => {
                 return ((
-                  await UnsplashService.search(CategoryEnum.PHOTO, {
+                  await unsplashService.search(CategoryEnum.PHOTO, {
                     page,
                     query: debouncedSearchVal
                   })

@@ -6,7 +6,7 @@ import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenNib, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 import useMediaQuery from '@/common/hooks/useMediaQuery';
 import { useToast } from '@/components/ui/use-toast';
 import useRequest from '@/common/hooks/useApiRequest';
@@ -22,7 +22,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
   const [photo, setPhoto] = useState<Basic>();
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { toast } = useToast();
-  const [{ loading }, doFetchPhoto] = useRequest(UnsplashService.getPhotoDetail);
+  const [{ loading }, doFetchPhoto] = useRequest(unsplashService.getPhotoDetail);
 
   useEffect(() => {
     (async () => {

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './CollectionBox.module.css';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { UnsplashService } from '@/common/services/unsplash';
+import { unsplashService } from '@/common/services/unsplash';
 
 interface CollectionBoxProps {
   collectionPhotos: CollectionPhotos;
@@ -27,7 +27,7 @@ export function CollectionBox(props: CollectionBoxProps) {
       if (photos.length > 10) {
         return;
       }
-      const photoResponse = await UnsplashService.getPhotos({ page: 2, perPage: 120 });
+      const photoResponse = await unsplashService.getPhotos({ page: 2, perPage: 120 });
       setPhotoMapper((prevState) => [...prevState, ...(photoResponse?.results || [])]);
     })();
   }, [photos]);
