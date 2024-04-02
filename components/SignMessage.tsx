@@ -57,7 +57,7 @@ export const SignMessage = (props: SignMessageProps) => {
           <DialogTitle>Connect wallet</DialogTitle>
           <DialogDescription>Connect to your wallet with signature</DialogDescription>
         </DialogHeader>
-        <div className={'flex flex-col gap-[24px]'} style={{ gap: '18px' }}>
+        <div className="flex flex-col gap-[24px]" style={{ gap: '18px' }}>
           <div className="grid w-full max-w-sm items-center gap-1.5" style={{ gap: '10px' }}>
             <Label htmlFor="email">Message</Label>
             <Input

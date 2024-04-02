@@ -17,8 +17,8 @@ export const HeaderResponsive = () => {
   return (
     <>
       {isMobile ? (
-        <div className={'md:block xl:hidden'}>
-          <Button onClick={() => setIsOpenModal(true)} variant={'outline'} size={'icon'}>
+        <div className="md:block xl:hidden">
+          <Button onClick={() => setIsOpenModal(true)} variant="outline" size="icon">
             <FontAwesomeIcon icon={faBars} />
           </Button>
           <Sheet open={isOpenModal} onOpenChange={() => setIsOpenModal(false)}>
