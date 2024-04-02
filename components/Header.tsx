@@ -1,8 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { HeaderQuickSearch } from '@/components/HeaderQuickSearch';
 import Link from 'next/link';
 import { HeaderResponsive } from '@/components/HeaderResponsive';
+import { Button } from '@/components/ui/button';
+import { LoginModal } from '@/common/layouts/MainLayouts/components/LoginModal';
+import { useState } from 'react';
+import { useWeb3Provider } from '@/common/providers/Web3Provider';
 
 const menuItems = [
   {
@@ -30,6 +36,8 @@ interface HeaderProps {
 }
 
 export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: HeaderProps) => {
+  const [openSignInModal, setOpenSignInModal] = useState(false);
+  const { signature } = useWeb3Provider();
   return (
     <div
       className={`flex ${isResponsive ? 'justify-start' : 'justify-between'}  gap-20  font-[500] sm:hidden md:hidden ${isResponsive ? 'flex-col-reverse items-start' : 'xl:flex'} gap-[20px] ${isResponsive ? 'w-full' : 'w-3/5'}`}
@@ -56,16 +64,21 @@ export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: Header
       >
         <HeaderQuickSearch onCloseModal={onCloseModal} />
         <div className={'flex items-center gap-1'}>
-          <div>
-            <Avatar>
-              <AvatarImage
-                src="https://plus.unsplash.com/premium_photo-1677337459537-4af0da479a84?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
-          <p className={'font-semibold'}>User</p>
+          {/*{signature ? (*/}
+          {/*  <>*/}
+          {/*    <Avatar>*/}
+          {/*      <AvatarImage*/}
+          {/*        src="https://plus.unsplash.com/premium_photo-1677337459537-4af0da479a84?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8"*/}
+          {/*        alt="@shadcn"*/}
+          {/*      />*/}
+          {/*      <AvatarFallback>CN</AvatarFallback>*/}
+          {/*    </Avatar>*/}
+          {/*    <p className={'font-semibold'}>User</p>*/}
+          {/*  </>*/}
+          {/*) : (*/}
+          <Button onClick={() => setOpenSignInModal(true)}>Login</Button>
+          {/*)}*/}
+          <LoginModal open={openSignInModal} onClose={() => setOpenSignInModal(false)} />
         </div>
       </div>
     </div>
