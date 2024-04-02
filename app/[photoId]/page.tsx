@@ -40,31 +40,20 @@ export default function PhotoDetailPage() {
 
   return (
     <div>
-      <div
-        className="md:w-full flex justify-center flex-col items-center"
-        style={{ marginTop: '10px' }}
-      >
+      <div className="md:w-full flex justify-center flex-col items-center mt-[10px]">
         <Image
           placeholder="blur"
           src={photo?.urls?.full || ''}
           alt={photo?.alt_description || ''}
-          style={{
-            height: '80dvh',
-            borderRadius: '8px',
-            objectFit: 'cover',
-            width: isMobile ? '100%' : '46%'
-          }}
           width={400}
           height={800}
+          className={`h-[80px] rounded-[8px] object-cover ${isMobile ? 'w-100%' : 'w-46%'}`}
           blurDataURL={photo?.urls?.small}
         />
-        <div
-          className="items-start mt-6 flex flex-col gap-3"
-          style={{ width: isMobile ? '100%' : '70%' }}
-        >
+        <div className={`items-start mt-6 flex flex-col gap-3 ${isMobile ? 'w-100%' : 'w-70%'}`}>
           {photo?.user?.name && (
-            <h1 style={{ fontSize: '20px', fontWeight: 500 }}>
-              <FontAwesomeIcon icon={faUser} className="mr-2" />
+            <h1>
+              <FontAwesomeIcon icon={faUser} className="mr-2 text-[20px] font-semibold" />
               {photo?.user?.name}
             </h1>
           )}
@@ -80,7 +69,7 @@ export default function PhotoDetailPage() {
               {photo?.user?.twitter_username}
             </p>
           )}
-          <a href={photo?.user?.portfolio_url || ''} style={{ textDecoration: 'underline' }}>
+          <a href={photo?.user?.portfolio_url || ''} className="underline">
             Portfolio url
           </a>
         </div>

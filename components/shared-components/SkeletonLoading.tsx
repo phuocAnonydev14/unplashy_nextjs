@@ -12,8 +12,7 @@ export const SkeletonLoading = () => {
       <Each<number>
         render={(item, index) => (
           <div
-            style={{ cursor: 'zoom-in' }}
-            className="gallery-container min-w-[200px] w-auto gc-1 gr-3"
+            className="gallery-container min-w-[200px] w-auto gc-1 gr-3 cursor-zoom-in"
             key={item}
           >
             <div className="gallery-item">

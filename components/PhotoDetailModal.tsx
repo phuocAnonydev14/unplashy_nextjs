@@ -1,5 +1,4 @@
 'use client';
-import Modal from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import { useEffect, useState } from 'react';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
@@ -62,30 +61,21 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
     <Dialog open={!!photoId} onOpenChange={onClose}>
       <DialogContent className="h-[96dvh] overflow-auto w-full min-w-[70dvw]">
         <div>
-          <div
-            className="md:w-full flex justify-center flex-col items-center"
-            style={{ marginTop: '10px' }}
-          >
+          <div className="md:w-full flex justify-center flex-col items-center mt-[10px]">
             <Image
               placeholder="blur"
               src={photo?.urls?.full || presetUrl}
               alt={photo?.alt_description || ''}
-              style={{
-                height: '80dvh',
-                borderRadius: '8px',
-                objectFit: 'cover',
-                width: isMobile ? '100%' : '46%'
-              }}
               width={400}
               height={800}
               blurDataURL={presetUrl}
+              className={`h-[80dvh] rounded-[8px] object-cover ${isMobile ? 'w-[100%]' : 'w-[46%]'}`}
             />
             <div
-              className="items-start mt-6 flex flex-col gap-3"
-              style={{ width: isMobile ? '100%' : '70%' }}
+              className={`items-start mt-6 flex flex-col gap-3 ${isMobile ? 'w-[100%]' : 'w-[70%]'}`}
             >
               {photo?.user?.name && (
-                <h1 style={{ fontSize: '20px', fontWeight: 500 }}>
+                <h1 className="text-[20px] font-semibold">
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
                   {photo?.user?.name}
                 </h1>
