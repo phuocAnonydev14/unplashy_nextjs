@@ -13,9 +13,9 @@ import { MetamaskIcon } from '@/common/icons';
 import { ethers } from 'ethers';
 import { walletConnectProvider } from '@/common/connections/walletConnect';
 import { CoinbaseConnect } from '@/common/connections/coinbaseConnect';
-import { SignMessage } from '@/common/layouts/MainLayouts/components/SignMessage';
 import { useWeb3Provider } from '@/common/providers/Web3Provider';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { SignMessage } from '@/components/SignMessage';
 
 interface LoginModalProps {
   open: boolean;
@@ -112,12 +112,12 @@ export const LoginModal = ({ open, onClose }: LoginModalProps) => {
             <DialogTitle>Connect wallet</DialogTitle>
             <DialogDescription>Connect to your wallet with signature</DialogDescription>
           </DialogHeader>
-          <div className={'flex flex-col gap-[24px]'} style={{ gap: '18px' }}>
+          <div className="flex flex-col gap-[24px]" style={{ gap: '18px' }}>
             {loginList.map(({ icon, action, title }) => (
               <Button
                 key={title}
-                variant={'secondary'}
-                className={' gap-3 inline-flex'}
+                variant="secondary"
+                className=" gap-3 inline-flex"
                 onClick={action}
               >
                 {icon}

@@ -1,11 +1,10 @@
 'use client';
 
-import Masonry from 'react-masonry-css';
 import { Basic } from 'unsplash-js/src/methods/photos/types';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { unsplashService } from '@/services/unsplash';
 import { useInView } from 'react-intersection-observer';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import useRequest from '@/hooks/useApiRequest';
 import { PhotoDetailModal } from '@/components/PhotoDetailModal';
 import { EmptyData } from '@/components/shared-components/EmptyData';
@@ -39,6 +38,13 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
   const collection = searchParams.get('collection') || collectionId;
   const { ref, inView } = useInView();
   const { toast } = useToast();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [currentPathname, setCurrentPathname] = useState(pathname);
+
+  useEffect(() => {
+    setCurrentPathname(pathname);
+  }, []);
 
   const handleLoadCollectionPhotos = async () => {
     if (!firstLoad) return;
@@ -127,11 +133,6 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
 
   return (
     <div>
-      {/*<Masonry*/}
-      {/*  breakpointCols={breakPoints}*/}
-      {/*  className="my-masonry-grid"*/}
-      {/*  columnClassName="my-masonry-grid_column"*/}
-      {/*>*/}
       <div className="wrapper max-w-[1440px]">
         {photos?.map((photo) => (
           <PhotoGalleryBoxMemo
@@ -142,11 +143,11 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
             handleClick={() => {
               setIsOpenDetail(photo.id);
               setSelectedImageUrl(photo.urls.small);
+              window.history.pushState({}, '', `/${photo.id}`);
             }}
           />
         ))}
       </div>
-      {/*</Masonry>*/}
 
       {images?.length > 0 ? (
         <div>
@@ -159,11 +160,15 @@ export const PhotoGallery = (props: PhotoGalleryProps) => {
       ) : (
         <EmptyData />
       )}
+
       {isOpenDetail && (
         <PhotoDetailModal
           photoId={isOpenDetail}
           presetUrl={selectedImageUrl}
-          onClose={() => setIsOpenDetail('')}
+          onClose={() => {
+            setIsOpenDetail('');
+            router.push(currentPathname, { scroll: false });
+          }}
         />
       )}
     </div>

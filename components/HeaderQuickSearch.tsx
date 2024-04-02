@@ -17,11 +17,8 @@ export const HeaderQuickSearch = ({ onCloseModal }: { onCloseModal?: () => void 
   };
 
   return (
-    <div className={'mr-3'}>
-      <Command
-        style={{ boxShadow: 'unset', borderRadius: '8px' }}
-        className="rounded-lg border shadow-md"
-      >
+    <div className="mr-3">
+      <Command className=" border rounded-[16px] shadow-muted-foreground">
         <CommandInput
           value={searchQuery}
           onValueChange={(val) => setSearchQuery(val)}

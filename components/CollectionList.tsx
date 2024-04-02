@@ -6,6 +6,7 @@ import { Each } from '@/components/shared-components/Each';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 interface CollectionsProps {
   collections: Collection[];
@@ -20,7 +21,7 @@ export const CollectionList = (props: CollectionsProps) => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const containerRef = useRef<any>(null);
-
+  const { width } = useWindowSize();
   const handleScroll = (scrollOffset: number) => {
     containerRef.current.scrollLeft += scrollOffset;
   };
@@ -45,7 +46,7 @@ export const CollectionList = (props: CollectionsProps) => {
         container.removeEventListener('scroll', handleScroll);
       }
     };
-  }, []);
+  }, [width]);
 
   const handleChooseCollection = async (collectionId?: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -58,14 +59,14 @@ export const CollectionList = (props: CollectionsProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative mb-10 mt-1 max-w-[100dvw]">
       {showLeftArrow && (
         <div
           style={{
             background:
               'linear-gradient(90deg, rgba(255,253,253,1) 0%, rgba(255,255,255,0.8940826330532213) 91%, rgba(255,255,255,0.02573529411764708) 100%)'
           }}
-          className="absolute left-[-20px] top-[-6px] w-24 h-14 rounded-bl flex items-center justify-center  transition-opacity"
+          className="absolute left-[-20px] top-[0px] w-24 h-10 rounded-bl flex items-center justify-center  transition-opacity"
           onClick={() => handleScroll(-200)}
         >
           <FontAwesomeIcon
@@ -77,7 +78,7 @@ export const CollectionList = (props: CollectionsProps) => {
       )}
       <div
         ref={containerRef}
-        className="flex gap-3 mb-10  max-w-[90dvw] pb-1 overflow-x-hidden scroll-smooth"
+        className="flex gap-3  max-w-[97dvw] pb-2 overflow-x-hidden scroll-smooth"
       >
         {!isSearch && (
           <Button
@@ -111,7 +112,7 @@ export const CollectionList = (props: CollectionsProps) => {
             background:
               'linear-gradient(90deg, rgba(255,253,253,0.06214985994397759) 0%, rgba(255,255,255,0.8632703081232493) 14%, rgba(255,255,255,1) 100%)'
           }}
-          className="absolute right-[-44px] top-[-6px] w-32 h-14 rounded-bl flex items-center justify-center  transition-opacity"
+          className="absolute right-[-48px] top-[0px] w-32 h-10 rounded-bl flex items-center justify-center  transition-opacity"
           onClick={() => handleScroll(200)}
         >
           <FontAwesomeIcon
@@ -121,6 +122,7 @@ export const CollectionList = (props: CollectionsProps) => {
           />
         </div>
       )}
+      <div className="w-full h-[1px] bg-[#bcbcbc]"></div>
     </div>
   );
 };

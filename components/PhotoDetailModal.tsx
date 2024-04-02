@@ -44,7 +44,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
     })();
   }, [photoId]);
 
-  if (!photo || loading) return;
+  // if (!photo || loading) return;
   return (
     // <Modal
     //   styles={{
@@ -68,7 +68,7 @@ export const PhotoDetailModal = (props: PhotoDetailModal) => {
           >
             <Image
               placeholder="blur"
-              src={presetUrl}
+              src={photo?.urls?.full || presetUrl}
               alt={photo?.alt_description || ''}
               style={{
                 height: '80dvh',

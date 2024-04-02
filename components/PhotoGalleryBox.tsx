@@ -11,10 +11,8 @@ interface PhotoGalleryBoxProps {
 }
 
 function getRandomNumber(endNum = 1) {
-  // Tạo số ngẫu nhiên từ 0 đến 2 (bao gồm 0, không bao gồm 2)
   const randomNumber = Math.random();
 
-  // Sau đó, thêm 2 để nằm trong khoảng từ 2 đến 4
   const numberInRange = randomNumber + endNum;
 
   // Làm tròn số (nếu cần)

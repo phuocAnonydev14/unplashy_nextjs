@@ -22,7 +22,7 @@ async function getPhotos(collectionId?: string) {
 
 async function getCollections() {
   try {
-    const collections = await unsplashService.getCollections();
+    const collections = await unsplashService.getCollections({ perPage: 20 });
     return collections;
   } catch (e) {
     console.log({ e });
@@ -40,7 +40,7 @@ export default async function Home(props: HomeProps) {
   const [photos, collections] = await Promise.all([photosData, collectionsData]);
   if (!photos || !collections) return;
   return (
-    <main className="flex min-h-screen flex-col items-center lg:px-20 md:px-10 sm:px-10 px-5 py-10 gap-1">
+    <main className="flex min-h-screen flex-col items-center gap-1">
       <CollectionList collections={collections.results} />
       <PhotoGallery images={photos?.results} />
     </main>

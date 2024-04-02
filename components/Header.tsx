@@ -1,14 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { HeaderQuickSearch } from '@/components/HeaderQuickSearch';
 import Link from 'next/link';
 import { HeaderResponsive } from '@/components/HeaderResponsive';
 import { Button } from '@/components/ui/button';
-import { LoginModal } from '@/common/layouts/MainLayouts/components/LoginModal';
 import { useState } from 'react';
 import { useWeb3Provider } from '@/common/providers/Web3Provider';
+import { LoginModal } from '@/components/LoginModal';
 
 const menuItems = [
   {
@@ -47,7 +46,7 @@ export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: Header
       >
         {menuItems.map(({ title, href }, index) => {
           return (
-            <span key={title} className={'hover:underline cursor-pointer text-[#707070]'}>
+            <span key={title} className="hover:underline cursor-pointer text-[#707070]">
               <Link
                 onClick={() => onCloseModal && onCloseModal()}
                 href={!href ? '/' : href}
@@ -63,7 +62,7 @@ export const HeaderConTent = ({ isResponsive, onCloseModal, activeMenu }: Header
         className={`flex ${isResponsive && 'flex-col-reverse'} gap-3 ${isResponsive ? 'items-start' : 'items-center'}`}
       >
         <HeaderQuickSearch onCloseModal={onCloseModal} />
-        <div className={'flex items-center gap-1'}>
+        <div className="flex items-center gap-1">
           {/*{signature ? (*/}
           {/*  <>*/}
           {/*    <Avatar>*/}
@@ -89,11 +88,11 @@ export const Header = () => {
   return (
     <>
       <div
-        className={'mb-1 flex justify-between items-center sticky top-0 bg-[#fff] z-40 px-[2rem]'}
+        className="mb-1 flex justify-between items-center sticky top-0 bg-[#fff] z-40 px-[2rem]"
         style={{ boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px' }}
       >
-        <Link href={'/'}>
-          <Image src={'/images/logo.png'} alt={'Logo'} width={80} height={80} />
+        <Link href="/">
+          <Image src="/images/logo.png" alt="Logo" width={80} height={80} />
         </Link>
         <HeaderResponsive />
       </div>

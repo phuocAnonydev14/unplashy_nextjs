@@ -24,19 +24,17 @@ export const SearchInput = (props: SearchInputProps) => {
     <div className="flex justify-center gap-3 relative">
       <div className="relative">
         <Input
-          style={{ paddingLeft: '35px' }}
           value={query}
           onChange={(e) => onChangeQuery(e.target.value)}
-          className="max-w-[500px] min-w-96"
+          className="max-w-[500px] min-w-96 pl-[35px]"
           type="search"
           placeholder="Search photo..."
         ></Input>
         <Button
-          style={{ position: 'absolute', left: '-2%', top: '0' }}
           onClick={handleSearch}
           disabled={loading}
           variant="link"
-          className="flex justify-center gap-1 items-center"
+          className="flex justify-center gap-1 items-center absolute left-[-2%] top-0"
         >
           {!loading ? (
             <svg

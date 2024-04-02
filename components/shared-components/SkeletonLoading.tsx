@@ -2,21 +2,29 @@
 import { Each } from '@/components/shared-components/Each';
 import { Skeleton } from '@/components/ui/skeleton';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import Image from 'next/image';
 
 export const SkeletonLoading = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <Each<number>
-      render={(item, index) => (
-        <div key={item} className="flex flex-col space-y-4">
-          <Skeleton
-            className="min-h-[300px] min-w-[400px] rounded-xl mt-2"
-            style={{ minHeight: '300px', width: isMobile ? '300px' : '420px' }}
-          />
-        </div>
-      )}
-      of={Array.from({ length: 3 })}
-    />
+    <div className="wrapper">
+      <Each<number>
+        render={(item, index) => (
+          <div
+            style={{ cursor: 'zoom-in' }}
+            className="gallery-container min-w-[200px] w-auto gc-1 gr-3"
+            key={item}
+          >
+            <div className="gallery-item">
+              <div className="image">
+                <Skeleton className="min-h-[500px] min-w-[350px] w-[100%] rounded-xl" />
+              </div>
+            </div>
+          </div>
+        )}
+        of={Array.from({ length: isMobile ? 2 : 4 })}
+      />
+    </div>
   );
 };
